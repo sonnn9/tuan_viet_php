@@ -1,2 +1,2 @@
 <?php
-echo "abcd1234";
+echo "12345";
