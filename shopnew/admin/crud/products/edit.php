@@ -53,6 +53,66 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- begin::Body -->
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 
+	<?php
+	$conn = new mysqli('localhost','root','','myadmin');
+	if($conn->connect_error){
+		echo "Connetion failed: ".$conn->connect_error;
+	}
+    $id = $_GET['id'];
+    $sql_category = "SELECT category_id, category_name FROM categories";
+    $opt_category = $conn->query($sql_category);
+	$category = '';
+	$category_name = 'Select category';
+
+    $sql_id = "SELECT * FROM products WHERE product_id=" . $id;
+    $detail = $conn->query($sql_id);
+    $detail = $detail->fetch_object();
+    $product_name = $detail->product_name;
+    $quantily = $detail->quantily;
+    $price = $detail->price;
+    $date_created = $detail->date_created;
+    $category = $detail->categories;
+    $description = $detail->description;
+	$errors = [];
+	if(isset($_POST['btn_editProduct'])){
+		$product_name = $_POST['product_name'];
+		$quantily = $_POST['quantily'];
+		$price = $_POST['price'];
+		$category = $_POST['category'];
+		$date_created = $_POST['date_created'];
+		$description = $_POST['description'];
+		if(strlen($product_name) < 5){
+			$errors['product_name'] = 1;
+		}
+		if($quantily < 1){
+			$errors['quantily'] = 1;
+		}
+		if($price < 1){
+			$errors['price'] = 1;
+		}
+		if($category == ''){
+			$errors['category'] = 1;
+		}
+		
+		if(strlen($date_created) < 6){
+			$errors['date_created'] = 1;
+		}
+		if(strlen($description) <20){
+			$errors['description'] = 1;
+		}
+        if ($errors == []) {
+            $sql_update = "UPDATE products SET product_name = '" . $product_name . "', quantily = '" . $quantily . "', price = '" . $price . "', date_created = '" . $date_created . "', categories = '" . $category . "', description = '" . $description . "' where product_id =" . $id;
+            if ($conn->query($sql_update) === TRUE) {
+                header('Location: http://localhost/tuan_viet_php/shopnew/admin/crud/products/list.php');
+            } else {
+                echo "Error: " . $sql_update . "<br>" . $conn->error;
+            }
+        }
+}
+$conn->close();
+	?>
+
+
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
 
@@ -1045,7 +1105,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														</a>
 													</li>
 													<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
-														<a href="../post/list.php" class="m-menu__link ">
+														<a href="../posts/list.php" class="m-menu__link ">
 															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																<span></span>
 															</i>
@@ -1157,144 +1217,105 @@ License: You must have a valid license purchased only from themeforest(the above
 
 					<!-- END: Subheader -->
 					<div class="m-content">
-						<div class="m-portlet m-portlet--mobile">
-							<div class="m-portlet__head">
-								<div class="m-portlet__head-caption">
-									<div class="m-portlet__head-title">
-										<h3 class="m-portlet__head-text">
-											List Products
-										</h3>
-									</div>
-								</div>
-								<div class="m-portlet__head-tools">
-									<ul class="m-portlet__nav">
-										<li class="m-portlet__nav-item">
-											<a href="#" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air">
-												<span>
-													<i class="la la-cart-plus"></i>
-													<span>New Order</span>
-												</span>
-											</a>
-										</li>
-										<li class="m-portlet__nav-item"></li>
-										<li class="m-portlet__nav-item">
-											<div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
-												<a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
-													<i class="la la-ellipsis-h m--font-brand"></i>
-												</a>
-												<div class="m-dropdown__wrapper">
-													<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-													<div class="m-dropdown__inner">
-														<div class="m-dropdown__body">
-															<div class="m-dropdown__content">
-																<ul class="m-nav">
-																	<li class="m-nav__section m-nav__section--first">
-																		<span class="m-nav__section-text">Quick Actions</span>
-																	</li>
-																	<li class="m-nav__item">
-																		<a href="" class="m-nav__link">
-																			<i class="m-nav__link-icon flaticon-share"></i>
-																			<span class="m-nav__link-text">Create Post</span>
-																		</a>
-																	</li>
-																	<li class="m-nav__item">
-																		<a href="" class="m-nav__link">
-																			<i class="m-nav__link-icon flaticon-chat-1"></i>
-																			<span class="m-nav__link-text">Send Messages</span>
-																		</a>
-																	</li>
-																	<li class="m-nav__item">
-																		<a href="" class="m-nav__link">
-																			<i class="m-nav__link-icon flaticon-multimedia-2"></i>
-																			<span class="m-nav__link-text">Upload File</span>
-																		</a>
-																	</li>
-																	<li class="m-nav__section">
-																		<span class="m-nav__section-text">Useful Links</span>
-																	</li>
-																	<li class="m-nav__item">
-																		<a href="" class="m-nav__link">
-																			<i class="m-nav__link-icon flaticon-info"></i>
-																			<span class="m-nav__link-text">FAQ</span>
-																		</a>
-																	</li>
-																	<li class="m-nav__item">
-																		<a href="" class="m-nav__link">
-																			<i class="m-nav__link-icon flaticon-lifebuoy"></i>
-																			<span class="m-nav__link-text">Support</span>
-																		</a>
-																	</li>
-																	<li class="m-nav__separator m-nav__separator--fit m--hide">
-																	</li>
-																	<li class="m-nav__item m--hide">
-																		<a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">Submit</a>
-																	</li>
-																</ul>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="m-portlet__body">
+						<div class="row">
+							<div class="col-md-6">
 
-								<!--begin: Datatable -->
-								<table class="table table-striped- table-bordered table-hover table-checkable" id="m_table_1">
-									<thead>
-										<tr>
-											<th>ProductID</th>
-											<th>Name</th>
-											<th>Quantily</th>
-											<th>Price</th>
-											<th>Date Created</th>
-											<th>Categories</th>
-											<th>Description</th>
-											<th>Actions</th>
-										</tr>
-									</thead>
-									<tbody>
-										
-									<?php
-        $conn = new mysqli('localhost', 'root', '', 'myadmin');
-        if ($conn->connect_error) {
-            die("Connection failed: . $conn->connect_error");
-        }
-        $sql = "SELECT * FROM products";
-        $result = $conn->query($sql);
-        while ($row = $result->fetch_array()){
-            ?>
-            <tr>
-                <td><?php echo $row['product_id'];?></td>
-                <td><?php echo $row['product_name'];?></td>
-                <td><?php echo $row['quantily'];?></td>
-                <td><?php echo $row['price'];?></td>
-                <td><?php echo $row['date_created'];?></td>
-                <td><?php echo $row['categories'];?></td>
-                <td><?php echo $row['description'];?></td>
-                <td nowrap="">
-                        <span class="dropdown">
-                            <a href="#" class="btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown" aria-expanded="false">
-                              <i class="la la-ellipsis-h"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-32px, 26px, 0px);">
-                                <a class="dropdown-item" href="edit.php?id=<?php echo $row['product_id'];?>"><i class="la la-edit"></i> Edit</a>
-                                <a class="dropdown-item" href="del.php?id=<?php echo $row['product_id'];?>"><i class="la la-leaf"></i> Delete</a>
-                            </div>
-                        </span>
-					</td>
-            </tr>
-            <?php
-        }
-        $conn->close();
-        ?>																
-									</tbody>
-								</table>
+								<!--begin::Portlet-->
+								<div class="m-portlet m-portlet--tab">
+									<div class="m-portlet__head">
+										<div class="m-portlet__head-caption">
+											<div class="m-portlet__head-title">
+												<span class="m-portlet__head-icon m--hide">
+													<i class="la la-gear"></i>
+												</span>
+												<h3 class="m-portlet__head-text">
+													Edit Products
+												</h3>
+											</div>
+										</div>
+									</div>
+
+									<!--begin::Form-->
+									<form action="edit.php?id=<?php echo $id; ?>" method="post" class="m-form m-form--fit m-form--label-align-right">
+										<div class="m-portlet__body">
+											<div class="form-group m-form__group">
+												<label >Name</label>
+												<input type="text" name="product_name" value="<?php echo $product_name;?>" class="form-control m-input">
+											</div>											
+											<?php if (isset($errors['product_name'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Products name required!
+												</div>
+												<?php endif;?>
+											<div class="form-group m-form__group">
+												<label >Quantily</label>
+												<input type="text" name="quantily" value="<?php echo $quantily;?>" class="form-control m-input">
+											</div>										
+											<?php if (isset($errors['quantily'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Quantily required!
+												</div>
+												<?php endif;?>
+											<div class="form-group m-form__group">
+												<label >Price</label>
+												<input type="text" name="price" value="<?php echo $price;?>" class="form-control m-input">
+											</div>									
+											<?php if (isset($errors['price'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Price required!
+												</div>
+												<?php endif;?>
+											<div class="form-group m-form__group">
+												<label >Date created</label>
+												<input type="text" name="date_created" value="<?php echo $date_created;?>" class="form-control m-input">
+											</div>
+											<?php if (isset($errors['date_created'])): ?>
+												<div class="alert alert-primary" role="alert">
+												DateCreated required!
+												</div>
+												<?php endif;?>
+											<div class="form-group m-form__group">
+												<select class="form-control m-input" name="category" id="exampleSelect1">
+													<option value="<?php echo $category;?>"><?php echo $category_name;?></option>
+													<?php
+													while ($row = $opt_category->fetch_array()) {
+														?>
+														<option value="<?php echo $row['category_id']; ?>" <?php echo $category == $row['category_id']? "selected" : '';?>> <?php echo $row['category_name']; ?> </option>
+														<?php
+													}
+													?>
+												</select>
+											</div>																			
+											<?php if (isset($errors['category'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Price required!
+												</div>
+												<?php endif;?>
+											<div class="form-group m-form__group">
+												<label for="exampleTextarea">Description</label>
+												<textarea class="form-control m-input" id="exampleTextarea" name="description" rows="3"><?php echo $description; ?></textarea>
+											</div>
+											<?php if (isset($errors['description'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Description required!
+												</div>
+												<?php endif;?>
+										</div>
+										<div class="m-portlet__foot m-portlet__foot--fit">
+											<div class="m-form__actions">
+												<button type="submit" name="btn_editProduct" class="btn btn-primary">Edit</button>
+												<button type="reset" class="btn btn-secondary">Cancel</button>
+											</div>
+										</div>
+									</form>
+
+									<!--end::Form-->
+								</div>
+
+								<!--end::Portlet-->
+							</div>
 							</div>
 						</div>
-						<!-- END EXAMPLE TABLE PORTLET-->
 					</div>
 				</div>
 			</div>

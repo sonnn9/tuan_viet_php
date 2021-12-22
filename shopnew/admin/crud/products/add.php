@@ -60,7 +60,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	}
 	$sql_category = "SELECT category_id, category_name FROM categories";
 	$opt_category = $conn->query($sql_category);
-	$category = 0;
+	$category = '';
 	$category_name = 'Select category';
 	$errors = [];
 	$product_name = '';
@@ -84,7 +84,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		if($price < 1){
 			$errors['price'] = 1;
 		}
-		if($category < 1){
+		if($category == ''){
 			$errors['category'] = 1;
 		}
 		
@@ -95,7 +95,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			$errors['description'] = 1;
 		}
 		if($errors === []){
-			$sql = "INSERT INTO products (product_name, quantily, price, date_created, categories, description) VALUES ('".$product_name."', '".$quantily."', '".$price."','".$date_created."','".$category_name."','".$description."')";
+			$sql = "INSERT INTO products (product_name, quantily, price, date_created, categories, description) VALUES ('".$product_name."', '".$quantily."', '".$price."','".$date_created."','".$category."','".$description."')";
 			if ($conn->query($sql) === TRUE) {
 			echo "A new product has been created!";
 			} else {
@@ -1287,7 +1287,7 @@ $conn->close();
 												<?php endif;?>
 											<div class="form-group m-form__group">
 												<label for="exampleTextarea">Description</label>
-												<textarea class="form-control m-input" id="exampleTextarea" name="description" rows="3"><?php echo $description; ?></textarea>
+												<textarea class="form-control m-input" id="exampleTextarea" name="description" rows="3"><?php echo $description;?></textarea>
 											</div>
 											<?php if (isset($errors['description'])): ?>
 												<div class="alert alert-primary" role="alert">
