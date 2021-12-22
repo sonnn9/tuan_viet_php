@@ -1256,29 +1256,39 @@ License: You must have a valid license purchased only from themeforest(the above
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>1</td>
-											<td>admin</td>
-											<td>123456</td>
-											<td>Admin Fullname</td>
-											<td>Junction@gmail.com</td>
-											<td>0912345678</td>
-											<td>12/12/2020</td>
-											<td nowrap="">
+									<?php
+        $conn = new mysqli('localhost', 'root', '', 'myadmin');
+        if ($conn->connect_error) {
+            die("Connection failed: . $conn->connect_error");
+        }
+        $sql = "SELECT * FROM users";
+        $result = $conn->query($sql);
+        while ($row = $result->fetch_array()){
+            ?>
+            <tr>
+                <td><?php echo $row['id'];?></td>
+                <td><?php echo $row['username'];?></td>
+                <td><?php echo $row['password'];?></td>
+                <td><?php echo $row['fullname'];?></td>
+                <td><?php echo $row['email'];?></td>
+                <td><?php echo $row['phone'];?></td>
+                <td><?php echo $row['date_created'];?></td>
+                <td nowrap="">
                         <span class="dropdown">
                             <a href="#" class="btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown" aria-expanded="false">
                               <i class="la la-ellipsis-h"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-32px, 26px, 0px);">
-                                <a class="dropdown-item" href="#"><i class="la la-edit"></i> Edit Details</a>
-                                <a class="dropdown-item" href="#"><i class="la la-leaf"></i> Update Status</a>
-                                <a class="dropdown-item" href="#"><i class="la la-print"></i> Generate Report</a>
+                                <a class="dropdown-item" href="edit.php?id=<?php echo $row['id'];?>"><i class="la la-edit"></i> Edit</a>
+                                <a class="dropdown-item" href="del.php?id=<?php echo $row['id'];?>"><i class="la la-leaf"></i> Delete</a>
                             </div>
                         </span>
-                        <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="View">
-                          <i class="la la-edit"></i>
-                        </a></td>
-										</tr>								
+					</td>
+            </tr>
+            <?php
+        }
+        $conn->close();
+        ?>													
 									</tbody>
 								</table>
 							</div>
