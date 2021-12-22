@@ -54,45 +54,40 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- end: My SQL -->
 	<!-- begin::Body -->
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+
 	<?php
-$errors = [];
-$username = '';
-$date_created = '';
+$connect = new mysqli('localhost', 'root', '', 'myadmin');
+$id = $_GET['id'];
+// tu validate
+$sql = "SELECT * FROM categories where category_id = " .$id ;
+$detail = $connect->query($sql);
+$detail = $detail->fetch_object();
+$username = $detail->category_name;
+$date_created = $detail->date_created;
+$errors =[];
 
 
-if (isset($_POST['btn_frmRegister'])) {
-    // username
+if (strlen($username) <= 3 ) {
+    $errors['username'] = 1;
+}
+
+if (strlen($date_created) <= 3 ) {
+    $errors['date_created'] = 1;
+}
+
+
+if (isset($_POST['update'])) {
     $username = $_POST['username'];
-    $date_created = $_POST['date_created'];
-
-    if (strlen($username) <= 3) {
-        $errors['username'] = 1;
+    $date_created= $_POST['date_created'];
+    $sql_update = "update categories set category_name = '".$username."',date_created='".$date_created."' where category_id = " .$id ;
+    $result_update = $connect->query($sql_update);
+    if ($result_update == true) {
+        echo "update thanhf cong";
+    }else{
+        echo "update loi";
     }
+}
 
-    // date created
-if (strlen($date_created) < 6) {
-        $errors['date_created'] =  1;
-    }
-             // Create connection
-             $conn = new mysqli('localhost', 'root','','myadmin');
-             // Check connection
-             if ($conn->connect_error) {
-                 die("Connection failed: " . $conn->connect_error);
-             }
-             if ($errors == []) {
-                 $sql = "INSERT INTO categories (category_name,date_created )
-            VALUES ('" . $username . "','" . $date_created . "')";
-
-                 if ($conn->query($sql) === TRUE) {
-                     echo "New record created successfully";
-                 } else {
-                     echo "Error: " . $sql . "<br>" . $conn->error;
-                 }
-
-                 $conn->close();
-
-             }
-    } 
 
 ?>
 		<!-- begin:: Page -->
@@ -1218,10 +1213,10 @@ if (strlen($date_created) < 6) {
 									</div>
 
 									<!--begin::Form-->
-									<form action="add.php" method="POST" class="m-form m-form--fit m-form--label-align-right">
+									<form action="edit.php?id=<?php echo $id; ?>" method="POST" class="m-form m-form--fit m-form--label-align-right">
 										<div class="m-portlet__body">
 											<div class="form-group m-form__group">
-												<label >Username</label>
+												<label >Name</label>
 												<input type="text" class="form-control m-input"  value="<?php echo $username;?>" name="username">
 												<?php if (isset($errors['username'])): ?>
 												<div class="alert alert-primary mt-1" role="alert">
@@ -1241,7 +1236,7 @@ if (strlen($date_created) < 6) {
 											</div>											
 										<div class="m-portlet__foot m-portlet__foot--fit">
 											<div class="m-form__actions">
-												<button type="submit" class="btn btn-primary" name="btn_frmRegister">Add New</button>
+												<button type="submit" class="btn btn-primary" name="update">edit</button>
 												<button type="reset" class="btn btn-secondary">Cancel</button>
 											</div>
 										</div>
