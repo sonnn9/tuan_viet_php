@@ -1074,7 +1074,7 @@ if (!$conn) {
 												<span class="m-menu__arrow"></span>
 												<ul class="m-menu__subnav">
 													<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
-														<a href="../posts/list.php" class="m-menu__link ">
+														<a href="../posts/add.php" class="m-menu__link ">
 															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																<span></span>
 															</i>
