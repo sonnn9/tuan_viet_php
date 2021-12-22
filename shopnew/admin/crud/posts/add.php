@@ -105,7 +105,7 @@ if (strlen( $date_created ) < 6) {
 			  die("Connection failed: " . $conn->connect_error);
 		  }
 		  if ($errors == []) {
-			  $sql = "INSERT INTO posts (title,description,date_created,created,image )
+			  $sql = "INSERT INTO posts (title,description,date_created,created_by,image )
 		 VALUES ('" . $title . "','" . $description . "','" . $date_created . "','" . $created . "','" . $image . "')";
 
 			  if ($conn->query($sql) === TRUE) {

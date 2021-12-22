@@ -53,7 +53,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- begin::Body -->
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 	<?php
-$connect = new mysqli('localhost', 'root', '', 'myadmin');
+$conn = new mysqli('localhost', 'root', '', 'myadmin');
 if($conn->connect_error){
 	echo "Connetion failed: ".$conn->connect_error;
 }
@@ -64,12 +64,12 @@ $sql_created = "SELECT id , fullname FROM users";
 	$fullname = 'Select created';
 
 $sql = "SELECT * FROM posts where post_id = " .$id ;
-$detail = $connect->query($sql);
+$detail = $conn->query($sql);
 $detail = $detail->fetch_object();
 $title = $detail->title;
 $description = $detail->description;
 $date_created = $detail->date_created;
-$created = $detail->created;
+$created = $detail->created_by;
 $image = $detail->image;
 $errors =[];
 
@@ -87,7 +87,7 @@ if (strlen( $date_created ) < 6) {
 	$errors['date_created'] =  1;
 }
 
-if ($created === 0) {
+if ($created =='') {
 	$errors['created'] =  1;
 
 }
@@ -101,8 +101,9 @@ if (strlen($image) < 6 ) {
         $date_created = $_POST['date_created'];
 		$created = $_POST['created'];
 		$image = $_POST['image'];
-        $sql_update = "update posts set title = '".$title."', description='".$description."'date_created='".$date_created."'created_by='".$created."'image='".$image."' where post_id = " .$id ;
-        $result_update = $connect->query($sql_update);
+        $sql_update = "update posts set title = '".$title."',description='".$description."',date_created='".$date_created."',created_by='".$created."',image='".$image."' where post_id = " .$id ;
+
+		$result_update = $conn->query($sql_update);
         if ($result_update == true) {
             echo "update thanhf cong";
         }else{
@@ -1419,10 +1420,17 @@ if (strlen($image) < 6 ) {
 											<?php endif; ?>
 											</div>
 											<div class="form-group m-form__group">
-												<select class="form-control m-input" id="exampleSelect1" value="<?php echo $created_by;?>" name="created_by">
-												<option>Created by</option>
+											<select class="form-control m-input" name="created" id="exampleSelect1">
+													<option value="<?php echo $created;?>"><?php echo $fullname;?></option>
+													<?php
+													while ($row = $opt_created->fetch_array()) {
+														?>
+														<option value="<?php echo $row['id']; ?>" <?php echo $created == $row['id']? "selected" : '';?>><?php echo $row['fullname']; ?></option>
+														<?php
+													}
+													?>
 												</select>
-													<?php if (isset($errors['created_by'])): ?>
+													<?php if (isset($errors['created'])): ?>
 													<div class="alert alert-primary mt-1" role="alert">
 													nguoi tao !
 													</div>
