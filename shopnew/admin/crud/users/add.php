@@ -52,7 +52,49 @@ License: You must have a valid license purchased only from themeforest(the above
 
 	<!-- begin::Body -->
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
-		<!-- begin:: Page -->
+	
+	<!--PHP validate -->
+	<?php 
+	$errors = [];
+	$user = '';
+	$password = '';
+	$fullname = '';
+	$email = '';
+	$phone = '';
+	$date_created = '';
+	if(isset($_POST['btn_addUser'])){
+		$user = $_POST['username'];
+		$password = $_POST['password'];
+		$fullname = $_POST['fullname'];
+		$email = $_POST['email'];
+		$phone = $_POST['phone'];
+		$date_created = $_POST['date_created'];
+		if(strlen($user) <= 3 || strlen($user) > 20 || !ctype_alnum($user)){
+			$errors['username'] = 1;
+		}
+		if(strlen($password) < 6){
+			$errors['password'] = 1;
+		}
+
+		if(strlen($fullname) <= 10){
+			$errors['fullname'] = 1;
+		}
+
+		if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+			$errors['email'] = 1;
+		}
+		if(strlen($phone) < 10){
+			$errors['phone'] = 1;
+		}
+		if(strlen($date_created) <= 5){
+			$errors['date_created'] = 1;
+		}
+
+	}
+	?>	
+	
+	
+	<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
 
 			<!-- BEGIN: Header -->
@@ -940,7 +982,7 @@ License: You must have a valid license purchased only from themeforest(the above
 												<span class="m-menu__arrow"></span>
 												<ul class="m-menu__subnav">
 													<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
-														<a href="add.php" class="m-menu__link ">
+														<a href="../products/add.php" class="m-menu__link ">
 															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																<span></span>
 															</i>
@@ -948,7 +990,7 @@ License: You must have a valid license purchased only from themeforest(the above
 														</a>
 													</li>
 													<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
-														<a href="list.php" class="m-menu__link ">
+														<a href="../products/list.php" class="m-menu__link ">
 															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																<span></span>
 															</i>
@@ -1175,36 +1217,66 @@ License: You must have a valid license purchased only from themeforest(the above
 									</div>
 
 									<!--begin::Form-->
-									<form class="m-form m-form--fit m-form--label-align-right">
+									<form method="post" action="add.php" class="m-form m-form--fit m-form--label-align-right">
 										<div class="m-portlet__body">
 											<div class="form-group m-form__group">
 												<label >Username</label>
-												<input type="text" name="username" class="form-control m-input">
+												<input type="text" name="username" value="<?php echo $user; ?>" class="form-control m-input">
 											</div>
+											<?php if (isset($errors['username'])): ?>
+												<div class="alert alert-primary" role="alert">
+ 												 Username required!
+												</div>
+												<?php endif;?>
 											<div class="form-group m-form__group">
 												<label >Password</label>
-												<input type="password" name="password" class="form-control m-input">
+												<input type="password" name="password" value="<?php echo $password; ?>" class="form-control m-input">
 											</div>
+											<?php if (isset($errors['password'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Password required!
+												</div>
+												<?php endif;?>
 											<div class="form-group m-form__group">
 												<label >Fullname</label>									
-												<input type="text" name="fullname" class="form-control m-input">
+												<input type="text" name="fullname" value="<?php echo $fullname; ?>" class="form-control m-input">
 											</div>
+											<?php if (isset($errors['fullname'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Fullname required!
+												</div>
+												<?php endif;?>
 											<div class="form-group m-form__group">
 												<label >Email</label>
-												<input type="email" name="email" class="form-control m-input">
+												<input type="email" name="email" value="<?php echo $email; ?>" class="form-control m-input">
 											</div>
+											<?php if (isset($errors['email'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Email required!
+												</div>
+												<?php endif;?>
 											<div class="form-group m-form__group">
 												<label >Phone</label>
-												<input type="text" name="phone" class="form-control m-input">
+												<input type="text" name="phone" value="<?php echo $phone; ?>" class="form-control m-input">
 											</div>
+											<?php if (isset($errors['phone'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Phone required!
+												</div>
+												<?php endif;?>
 											<div class="form-group m-form__group">
 												<label >Date Created</label>
-												<input type="text" name="date_created" class="form-control m-input">
+												<input type="text" name="date_created" value="<?php echo $date_created; ?>" class="form-control m-input">
 											</div>
+											<?php if (isset($errors['date_created'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Date required!
+												</div>
+												<?php endif;?>
 										</div>
 										<div class="m-portlet__foot m-portlet__foot--fit">
 											<div class="m-form__actions">
-												<button type="reset" name="btn_addUser" class="btn btn-primary">Add New</button>
+												<button type="submit" name="btn_addUser" class="btn btn-primary">Add New</button>
 												<button type="reset" class="btn btn-secondary">Cancel</button>
 											</div>
 										</div>

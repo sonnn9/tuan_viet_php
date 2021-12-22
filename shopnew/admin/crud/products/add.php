@@ -53,6 +53,44 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- begin::Body -->
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 
+	<?php
+	$errors = [];
+	$product_name = '';
+	$quantily = '';
+	$price = '';
+	$category = 0;
+	$date_created = '';
+	$description= '';
+	if(isset($_POST['btn_addProduct'])){
+		$product_name = $_POST['product_name'];
+		$quantily = $_POST['quantily'];
+		$price = $_POST['price'];
+		$category = $_POST['category'];
+		$date_created = $_POST['date_created'];
+		$description = $_POST['description'];
+		if(strlen($product_name) < 10){
+			$errors['product_name'] = 1;
+		}
+		if($quantily < 1){
+			$errors['quantily'] = 1;
+		}
+		if($price < 1){
+			$errors['price'] = 1;
+		}
+		// ifcategory) < 1){
+		// 	$errors['category'] = 1;
+		// }
+		
+		if(strlen($date_created) < 6){
+			$errors['date_created'] = 1;
+		}
+		if(strlen($description) <20){
+			$errors['description'] = 1;
+		}
+	}
+	?>
+
+
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
 
@@ -1176,37 +1214,67 @@ License: You must have a valid license purchased only from themeforest(the above
 									</div>
 
 									<!--begin::Form-->
-									<form class="m-form m-form--fit m-form--label-align-right">
+									<form action="add.php" method="post" class="m-form m-form--fit m-form--label-align-right">
 										<div class="m-portlet__body">
 											<div class="form-group m-form__group">
 												<label >Name</label>
-												<input type="text" class="form-control m-input">
-											</div>
+												<input type="text" name="product_name" value="<?php echo $product_name;?>" class="form-control m-input">
+											</div>											
+											<?php if (isset($errors['product_name'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Products name required!
+												</div>
+												<?php endif;?>
 											<div class="form-group m-form__group">
 												<label >Quantily</label>
-												<input type="text" class="form-control m-input">
-											</div>
+												<input type="text" name="quantily" value="<?php echo $quantily;?>" class="form-control m-input">
+											</div>										
+											<?php if (isset($errors['quantily'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Quantily required!
+												</div>
+												<?php endif;?>
 											<div class="form-group m-form__group">
 												<label >Price</label>
-												<input type="text" class="form-control m-input">
-											</div>
+												<input type="text" name="price" value="<?php echo $price;?>" class="form-control m-input">
+											</div>									
+											<?php if (isset($errors['price'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Price required!
+												</div>
+												<?php endif;?>
 											<div class="form-group m-form__group">
-												<select class="form-control m-input" id="exampleSelect1">
-													<option>Categories</option>
+												<select class="form-control m-input" name="category" id="exampleSelect1">
+													<option value=0>Categories</option>
 												</select>
-											</div>
+											</div>																			
+											<!-- <?php if (isset($errors['category'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Price required!
+												</div>
+												<?php endif;?> -->
 											<div class="form-group m-form__group">
-												<label >Date create</label>
-												<input type="text" class="form-control m-input">
+												<label >Date created</label>
+												<input type="text" name="date_created" value="<?php echo $date_created;?>" class="form-control m-input">
 											</div>
+											<?php if (isset($errors['date_created'])): ?>
+												<div class="alert alert-primary" role="alert">
+												DateCreated required!
+												</div>
+												<?php endif;?>
 											<div class="form-group m-form__group">
 												<label for="exampleTextarea">Description</label>
-												<textarea class="form-control m-input" id="exampleTextarea" rows="3"></textarea>
+												<textarea class="form-control m-input" id="exampleTextarea" name="description" rows="3"><?php echo $description;?></textarea>
 											</div>
+											<?php if (isset($errors['description'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Description required!
+												</div>
+												<?php endif;?>
 										</div>
 										<div class="m-portlet__foot m-portlet__foot--fit">
 											<div class="m-form__actions">
-												<button type="reset" class="btn btn-primary">Add New</button>
+												<button type="submit" name="btn_addProduct" class="btn btn-primary">Add New</button>
 												<button type="reset" class="btn btn-secondary">Cancel</button>
 											</div>
 										</div>
