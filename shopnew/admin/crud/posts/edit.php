@@ -65,13 +65,14 @@ $created_by = $detail->created_by;
 $image = $detail->image;
 $errors =[];
 
-if (isset($_POST['btn_frmRegister'])) {
+if (isset($_POST['btn btn-primary'])) {
     // username
     $title = $_POST['title'];
     $description = $_POST['description'];
     $date_created = $_POST['date_created'];
     $created_by = $_POST['created_by'];
     $image = $_POST['image'];
+}
 
     if (isset($_POST['update'])) {
         $username = $_POST['username'];
