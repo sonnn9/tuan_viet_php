@@ -60,7 +60,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	}
 	$sql_category = "SELECT category_id, category_name FROM categories";
 	$opt_category = $conn->query($sql_category);
-	$category = 0;
+	$category = '';
 	$category_name = 'Select category';
 	$errors = [];
 	$product_name = '';
@@ -75,7 +75,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		$category = $_POST['category'];
 		$date_created = $_POST['date_created'];
 		$description = $_POST['description'];
-		if(strlen($product_name) < 10){
+		if(strlen($product_name) < 5){
 			$errors['product_name'] = 1;
 		}
 		if($quantily < 1){
@@ -84,7 +84,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		if($price < 1){
 			$errors['price'] = 1;
 		}
-		if($category === 0){
+		if($category == ''){
 			$errors['category'] = 1;
 		}
 		
@@ -94,8 +94,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		if(strlen($description) <20){
 			$errors['description'] = 1;
 		}
-		if($errors ==[]){
-			$sql = "INSERT INTO products (product_name, quantily, price, date_created, category, description) VALUES ('".$product_name."', '".$quantily."', '".$price."','".$date_created."','".$category."','".$description."')";
+		if($errors === []){
+			$sql = "INSERT INTO products (product_name, quantily, price, date_created, categories, description) VALUES ('".$product_name."', '".$quantily."', '".$price."','".$date_created."','".$category."','".$description."')";
 			if ($conn->query($sql) === TRUE) {
 			echo "A new product has been created!";
 			} else {
@@ -103,6 +103,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			}
 	}
 }
+$conn->close();
 	?>
 
 
