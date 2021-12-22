@@ -1274,7 +1274,7 @@ License: You must have a valid license purchased only from themeforest(the above
 											<div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-32px, 26px, 0px);">
 
 												  <a class="la la-edit" href="edit.php?id=<?php echo $r[0]; ?>">Edit</a>
-												  <a class="la la-edit" href="del.php?id=<?php echo $r[0]; ?>">Del</a>
+												  <a class="la la-edit" href="deleta.php?id=<?php echo $r[0]; ?>">Del</a>
 											</div>
 										</span>
 											</td>
