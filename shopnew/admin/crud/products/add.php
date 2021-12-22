@@ -54,11 +54,18 @@ License: You must have a valid license purchased only from themeforest(the above
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 
 	<?php
+	$conn = new mysqli('localhost','root','','myadmin');
+	if($conn->connect_error){
+		echo "Connetion failed: ".$conn->connect_error;
+	}
+	$sql_category = "SELECT category_id, category_name FROM categories";
+	$opt_category = $conn->query($sql_category);
+	$category = 0;
+	$category_name = 'Select category';
 	$errors = [];
 	$product_name = '';
 	$quantily = '';
 	$price = '';
-	$category = 0;
 	$date_created = '';
 	$description= '';
 	if(isset($_POST['btn_addProduct'])){
@@ -77,9 +84,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		if($price < 1){
 			$errors['price'] = 1;
 		}
-		// ifcategory) < 1){
-		// 	$errors['category'] = 1;
-		// }
+		if($category === 0){
+			$errors['category'] = 1;
+		}
 		
 		if(strlen($date_created) < 6){
 			$errors['date_created'] = 1;
@@ -87,7 +94,15 @@ License: You must have a valid license purchased only from themeforest(the above
 		if(strlen($description) <20){
 			$errors['description'] = 1;
 		}
+		if($errors ==[]){
+			$sql = "INSERT INTO products (product_name, quantily, price, date_created, category, description) VALUES ('".$product_name."', '".$quantily."', '".$price."','".$date_created."','".$category."','".$description."')";
+			if ($conn->query($sql) === TRUE) {
+			echo "A new product has been created!";
+			} else {
+			echo "Error: " . $sql . "<br>" . $conn->error;
+			}
 	}
+}
 	?>
 
 
@@ -1244,22 +1259,29 @@ License: You must have a valid license purchased only from themeforest(the above
 												</div>
 												<?php endif;?>
 											<div class="form-group m-form__group">
-												<select class="form-control m-input" name="category" id="exampleSelect1">
-													<option value=0>Categories</option>
-												</select>
-											</div>																			
-											<!-- <?php if (isset($errors['category'])): ?>
-												<div class="alert alert-primary" role="alert">
-												Price required!
-												</div>
-												<?php endif;?> -->
-											<div class="form-group m-form__group">
 												<label >Date created</label>
 												<input type="text" name="date_created" value="<?php echo $date_created;?>" class="form-control m-input">
 											</div>
 											<?php if (isset($errors['date_created'])): ?>
 												<div class="alert alert-primary" role="alert">
 												DateCreated required!
+												</div>
+												<?php endif;?>
+											<div class="form-group m-form__group">
+												<select class="form-control m-input" name="category" id="exampleSelect1">
+													<option value="<?php echo $category;?>"><?php echo $category_name;?></option>
+													<?php
+													while ($row = $opt_category->fetch_array()) {
+														?>
+														<option value="<?php echo $row['category_id']; ?>" <?php echo $category == $row['category_id']? "selected" : '';?>> <?php echo $row['category_name']; ?> </option>
+														<?php
+													}
+													?>
+												</select>
+											</div>																			
+											<?php if (isset($errors['category'])): ?>
+												<div class="alert alert-primary" role="alert">
+												Price required!
 												</div>
 												<?php endif;?>
 											<div class="form-group m-form__group">
