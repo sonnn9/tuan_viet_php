@@ -54,15 +54,22 @@ License: You must have a valid license purchased only from themeforest(the above
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 	<?php
 $connect = new mysqli('localhost', 'root', '', 'myadmin');
+if($conn->connect_error){
+	echo "Connetion failed: ".$conn->connect_error;
+}
 $id = $_GET['id'];
-// tu validate
+$sql_created = "SELECT id , fullname FROM users";
+	$opt_created = $conn->query($sql_created);
+	$created = '';
+	$fullname = 'Select created';
+
 $sql = "SELECT * FROM posts where post_id = " .$id ;
 $detail = $connect->query($sql);
 $detail = $detail->fetch_object();
 $title = $detail->title;
 $description = $detail->description;
 $date_created = $detail->date_created;
-$created_by = $detail->created_by;
+$created = $detail->created;
 $image = $detail->image;
 $errors =[];
 
@@ -80,8 +87,8 @@ if (strlen( $date_created ) < 6) {
 	$errors['date_created'] =  1;
 }
 
-if (strlen($created_by) < 7) {
-	$errors['created_by'] =  1;
+if ($created === 0) {
+	$errors['created'] =  1;
 
 }
 if (strlen($image) < 6 ) {
@@ -92,9 +99,9 @@ if (strlen($image) < 6 ) {
         $title = $_POST['title'];
 		$description = $_POST['description'];
         $date_created = $_POST['date_created'];
-		$created_by = $_POST['created_by'];
+		$created = $_POST['created'];
 		$image = $_POST['image'];
-        $sql_update = "update posts set title = '".$title."', description='".$description."'date_created='".$date_created."'created_by='".$created_by."'image='".$image."' where post_id = " .$id ;
+        $sql_update = "update posts set title = '".$title."', description='".$description."'date_created='".$date_created."'created_by='".$created."'image='".$image."' where post_id = " .$id ;
         $result_update = $connect->query($sql_update);
         if ($result_update == true) {
             echo "update thanhf cong";
