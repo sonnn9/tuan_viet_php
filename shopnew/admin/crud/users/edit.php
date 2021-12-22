@@ -1225,7 +1225,7 @@ License: You must have a valid license purchased only from themeforest(the above
 													<i class="la la-gear"></i>
 												</span>
 												<h3 class="m-portlet__head-text">
-													Add Users
+													Edit Users
 												</h3>
 											</div>
 										</div>
@@ -1291,7 +1291,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										</div>
 										<div class="m-portlet__foot m-portlet__foot--fit">
 											<div class="m-form__actions">
-												<button type="submit" name="btn_editUser" class="btn btn-primary">Add New</button>
+												<button type="submit" name="btn_editUser" class="btn btn-primary">Edit</button>
 												<button type="reset" class="btn btn-secondary">Cancel</button>
 											</div>
 										</div>
