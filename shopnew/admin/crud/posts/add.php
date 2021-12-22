@@ -1395,7 +1395,7 @@ if (!$conn) {
 											</div>
 											<div class="form-group m-form__group">
 												<label for="exampleTextarea">Description</label>
-												<textarea class="form-control m-input" value="<?php echo $description;?>" name="description" id="exampleTextarea" rows="3"></textarea>
+												<textarea class="form-control m-input" name="description" id="exampleTextarea" rows="3"><?php echo $description;?></textarea>
 												<?php if (isset($errors['description'])): ?>
 												<div class="alert alert-primary mt-1" role="alert">
 													content !

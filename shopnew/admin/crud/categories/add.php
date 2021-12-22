@@ -1226,7 +1226,7 @@ if (!$conn) {
 
 											</div>										
 											<div class="form-group m-form__group">
-												<label >Date Created</label>
+												<label >Date created</label>
 												<input type="text" class="form-control m-input" value="<?php echo $date_created;?>" name="date_created">
 												<?php if (isset($errors['date_created'])): ?>
 												<div class="alert alert-primary mt-1" role="alert">
