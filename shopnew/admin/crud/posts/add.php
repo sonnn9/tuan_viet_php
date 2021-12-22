@@ -52,7 +52,60 @@ License: You must have a valid license purchased only from themeforest(the above
 
 	<!-- begin::Body -->
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+	<?php
+$errors = [];
+$title = '';
+$description = '';
+$date_created = '';
+$created_by = '';
+$image = '';
 
+
+if (isset($_POST['btn_frmRegister'])) {
+    // username
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $date_created = $_POST['date_created'];
+    $created_by = $_POST['created_by'];
+    $image = $_POST['image'];
+    if (strlen($title) <= 3) {
+        $errors['title'] = 1;
+    }
+
+    // description
+    if (strlen($description) < 20) {
+        $errors['description'] = 1;
+    }
+
+    // date created
+if (strlen( $date_created ) < 6) {
+        $errors['date_created'] =  1;
+    }
+
+    if (strlen($created_by) < 7) {
+        $errors['created_by'] =  1;
+
+    }
+    if (strlen($image) < 6 ) {
+        $errors['image'] = 1;
+    }
+
+}
+
+/*$servername = "localhost";
+$username = "root";
+$password ="";
+$dbname = "fix";
+//create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// check connection
+if (!$conn) {
+    die("Connection failed:" . $conn->connect_error);
+*/
+
+
+
+?>
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
 
@@ -1329,37 +1382,59 @@ License: You must have a valid license purchased only from themeforest(the above
 									</div>
 
 									<!--begin::Form-->
-									<form class="m-form m-form--fit m-form--label-align-right">
+									<form actions="add.php" method="POST" class="m-form m-form--fit m-form--label-align-right">
 										<div class="m-portlet__body">
 											<div class="form-group m-form__group">
 												<label >Title</label>
-												<input type="text" class="form-control m-input">
+												<input type="text" class="form-control m-input" value="<?php echo $title;?>" name="title">
+												<?php if (isset($errors['title'])): ?>
+													<div class="alert alert-primary mt-1" role="alert">
+														nhap lai !
+													</div>
+												<?php endif; ?>
 											</div>
 											<div class="form-group m-form__group">
 												<label for="exampleTextarea">Description</label>
-												<textarea class="form-control m-input" id="exampleTextarea" rows="3"></textarea>
-											</div>
-											<div class="form-group m-form__group">
-												<label >Date create</label>
-												<input type="text" class="form-control m-input">
-											</div>
-											<div class="form-group m-form__group">
-												<select class="form-control m-input" id="exampleSelect1">
-													<option>Created by</option>
-												</select>
+												<textarea class="form-control m-input" value="<?php echo $description;?>" name="description" id="exampleTextarea" rows="3"></textarea>
+												<?php if (isset($errors['description'])): ?>
+												<div class="alert alert-primary mt-1" role="alert">
+													content !
+												</div>
+											<?php endif; ?>
 											</div>
 											<div class="form-group m-form__group">
 												<label >Date created</label>
-												<input type="text" class="form-control m-input">
+												<input type="text" class="form-control m-input" value="<?php echo $date_created;?>" name="date_created">
+												<?php if (isset($errors['date_created'])): ?>
+												<div class="alert alert-primary mt-1" role="alert">
+													hay nhập lại pass !
+												</div>
+											<?php endif; ?>
 											</div>
 											<div class="form-group m-form__group">
+												<select class="form-control m-input" id="exampleSelect1" value="<?php echo $created_by;?>" name="created_by">
+												<option>Created by</option>
+												</select>
+													<?php if (isset($errors['created_by'])): ?>
+													<div class="alert alert-primary mt-1" role="alert">
+													nguoi tao !
+													</div>
+												<?php endif; ?>
+                                            </div>   
+											<div class="form-group m-form__group">
 												<label >Image</label>
-												<input type="text" class="form-control m-input">
+												<input type="text" class="form-control m-input" value="<?php echo $image;?>" name="image">
+												<?php if (isset($errors['image'])): ?>
+											<div class="alert alert-primary mt-1" role="alert">
+												image !
 											</div>
+										<?php endif; ?>
+													</div>
+										
 										</div>
 										<div class="m-portlet__foot m-portlet__foot--fit">
 											<div class="m-form__actions">
-												<button type="reset" class="btn btn-primary">Add New</button>
+												<button type="submit" class="btn btn-primary" name="btn_frmRegister">Add New</button>
 												<button type="reset" class="btn btn-secondary">Cancel</button>
 											</div>
 										</div>

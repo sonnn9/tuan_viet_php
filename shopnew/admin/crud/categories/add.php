@@ -54,7 +54,42 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- end: My SQL -->
 	<!-- begin::Body -->
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+	<?php
+$errors = [];
+$username = '';
+$date_created = '';
 
+
+if (isset($_POST['btn_frmRegister'])) {
+    // username
+    $username = $_POST['username'];
+    $date_created = $_POST['date_created'];
+
+    if (strlen($username) <= 3) {
+        $errors['username'] = 1;
+    }
+
+    // date created
+if (strlen($date_created) < 6) {
+        $errors['date_created'] =  1;
+    }
+
+}
+
+/*$servername = "localhost";
+$username = "root";
+$password ="";
+$dbname = "fix";
+//create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// check connection
+if (!$conn) {
+    die("Connection failed:" . $conn->connect_error);
+*/
+
+
+
+?>
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
 
@@ -1178,19 +1213,30 @@ License: You must have a valid license purchased only from themeforest(the above
 									</div>
 
 									<!--begin::Form-->
-									<form class="m-form m-form--fit m-form--label-align-right">
+									<form action="add.php" method="POST" class="m-form m-form--fit m-form--label-align-right">
 										<div class="m-portlet__body">
 											<div class="form-group m-form__group">
-												<label >Name</label>
-												<input type="text" class="form-control m-input">
+												<label >Username</label>
+												<input type="text" class="form-control m-input"  value="<?php echo $username;?>" name="username">
+												<?php if (isset($errors['username'])): ?>
+												<div class="alert alert-primary mt-1" role="alert">
+													nhập tên !
+												</div>
+											<?php endif; ?>
+
 											</div>										
 											<div class="form-group m-form__group">
-												<label >Date create</label>
-												<input type="text" class="form-control m-input">
+												<label >Date Created</label>
+												<input type="text" class="form-control m-input" value="<?php echo $date_created;?>" name="date_created">
+												<?php if (isset($errors['date_created'])): ?>
+												<div class="alert alert-primary mt-1" role="alert">
+													hsd!
+												</div>
+											<?php endif; ?>
 											</div>											
 										<div class="m-portlet__foot m-portlet__foot--fit">
 											<div class="m-form__actions">
-												<button type="reset" class="btn btn-primary">Add New</button>
+												<button type="submit" class="btn btn-primary" name="btn_frmRegister">Add New</button>
 												<button type="reset" class="btn btn-secondary">Cancel</button>
 											</div>
 										</div>

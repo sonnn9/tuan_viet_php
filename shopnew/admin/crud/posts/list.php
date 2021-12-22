@@ -1253,15 +1253,25 @@ License: You must have a valid license purchased only from themeforest(the above
 											<th>Actions</th>
 										</tr>
 									</thead>
-									<tbody>
+									<?php
+									$conn = new mysqli('localhost','root','','fix');
+										$sql = "SELECT * FROM more";
+										$results = $conn->query($sql)->fetch_all();
+										foreach ($results as $r){
+											?>
 										<tr>
-											<td>1</td>
-											<td>Title post</td>
-											<td>Content post</td>
-											<td>admin</td>
-											<td>12/12/2020</td>
-											<td>URL image</td>
+		     							<tbody>
+										<tr>
+											<th scope="row"><?php echo $r[0];?></td>
+											<th><?php echo $r[0];?></th>
+											<th><?php echo $r[0];?></th>
+											<th><?php echo $r[0];?></th>
+											<th><?php echo $r[0];?></th>
+											<th><?php echo $r[0];?></th>
 											<td nowrap="">
+										<?php
+										}
+										?>
                         <span class="dropdown">
                             <a href="#" class="btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown" aria-expanded="false">
                               <i class="la la-ellipsis-h"></i>
