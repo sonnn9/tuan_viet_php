@@ -56,56 +56,52 @@ License: You must have a valid license purchased only from themeforest(the above
 $connect = new mysqli('localhost', 'root', '', 'myadmin');
 $id = $_GET['id'];
 // tu validate
-$sql = "SELECT * FROM categories where category_id = " .$id ;
+$sql = "SELECT * FROM posts where post_id = " .$id ;
 $detail = $connect->query($sql);
 $detail = $detail->fetch_object();
 $title = $detail->title;
+$description = $detail->description;
 $date_created = $detail->date_created;
 $created_by = $detail->created_by;
 $image = $detail->image;
 $errors =[];
 
-if (isset($_POST['btn btn-primary'])) {
-    // username
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $date_created = $_POST['date_created'];
-    $created_by = $_POST['created_by'];
-    $image = $_POST['image'];
+if (strlen($title) <= 3) {
+	$errors['title'] = 1;
+}
+
+// description
+if (strlen($description) < 20) {
+	$errors['description'] = 1;
+}
+
+// date created
+if (strlen( $date_created ) < 6) {
+	$errors['date_created'] =  1;
+}
+
+if (strlen($created_by) < 7) {
+	$errors['created_by'] =  1;
+
+}
+if (strlen($image) < 6 ) {
+	$errors['image'] = 1;
 }
 
     if (isset($_POST['update'])) {
-        $username = $_POST['username'];
+        $title = $_POST['title'];
+		$description = $_POST['description'];
         $date_created = $_POST['date_created'];
-        $sql_update = "update categories set title = '".$title."', description='".$description."'date_created='".$date_created."'created_by='".$created_by."'image='".$image."' where category_id = " .$id ;
+		$created_by = $_POST['created_by'];
+		$image = $_POST['image'];
+        $sql_update = "update posts set title = '".$title."', description='".$description."'date_created='".$date_created."'created_by='".$created_by."'image='".$image."' where post_id = " .$id ;
         $result_update = $connect->query($sql_update);
         if ($result_update == true) {
             echo "update thanhf cong";
         }else{
             echo "update loi";
         }
-    if (strlen($title) <= 3) {
-        $errors['title'] = 1;
-    }
-
-    // description
-    if (strlen($description) < 20) {
-        $errors['description'] = 1;
-    }
-
-    // date created
-if (strlen( $date_created ) < 6) {
-        $errors['date_created'] =  1;
-    }
-
-    if (strlen($created_by) < 7) {
-        $errors['created_by'] =  1;
-
-    }
-    if (strlen($image) < 6 ) {
-        $errors['image'] = 1;
-    }
-
+  
 }
 
 ?>
@@ -1438,7 +1434,7 @@ if (strlen( $date_created ) < 6) {
 										</div>
 										<div class="m-portlet__foot m-portlet__foot--fit">
 											<div class="m-form__actions">
-												<button type="submit" class="btn btn-primary" name="btn_frmRegister">Add New</button>
+												<button type="submit" class="btn btn-primary" name="update">edit</button>
 												<button type="reset" class="btn btn-secondary">Cancel</button>
 											</div>
 										</div>
