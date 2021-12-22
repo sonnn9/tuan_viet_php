@@ -49,52 +49,66 @@ License: You must have a valid license purchased only from themeforest(the above
 	</head>
 
 	<!-- end::Head -->
-    <!-- begin: My SQL -->
 
-    <!-- end: My SQL -->
 	<!-- begin::Body -->
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 	<?php
-$errors = [];
-$username = '';
-$date_created = '';
-
+$connect = new mysqli('localhost', 'root', '', 'myadmin');
+$id = $_GET['id'];
+// tu validate
+$sql = "SELECT * FROM categories where category_id = " .$id ;
+$detail = $connect->query($sql);
+$detail = $detail->fetch_object();
+$title = $detail->title;
+$date_created = $detail->date_created;
+$created_by = $detail->created_by;
+$image = $detail->image;
+$errors =[];
 
 if (isset($_POST['btn_frmRegister'])) {
     // username
-    $username = $_POST['username'];
+    $title = $_POST['title'];
+    $description = $_POST['description'];
     $date_created = $_POST['date_created'];
+    $created_by = $_POST['created_by'];
+    $image = $_POST['image'];
 
-    if (strlen($username) <= 3) {
-        $errors['username'] = 1;
+    if (isset($_POST['update'])) {
+        $username = $_POST['username'];
+        $date_created = $_POST['date_created'];
+        $sql_update = "update categories set title = '".$title."', description='".$description."'date_created='".$date_created."'created_by='".$created_by."'image='".$image."' where category_id = " .$id ;
+        $result_update = $connect->query($sql_update);
+        if ($result_update == true) {
+            echo "update thanhf cong";
+        }else{
+            echo "update loi";
+        }
+    if (strlen($title) <= 3) {
+        $errors['title'] = 1;
+    }
+
+    // description
+    if (strlen($description) < 20) {
+        $errors['description'] = 1;
     }
 
     // date created
-if (strlen($date_created) < 6) {
+if (strlen( $date_created ) < 6) {
         $errors['date_created'] =  1;
     }
-             // Create connection
-             $conn = new mysqli('localhost', 'root','','myadmin');
-             // Check connection
-             if ($conn->connect_error) {
-                 die("Connection failed: " . $conn->connect_error);
-             }
-             if ($errors == []) {
-                 $sql = "INSERT INTO categories (category_name,date_created )
-            VALUES ('" . $username . "','" . $date_created . "')";
 
-                 if ($conn->query($sql) === TRUE) {
-                     echo "New record created successfully";
-                 } else {
-                     echo "Error: " . $sql . "<br>" . $conn->error;
-                 }
+    if (strlen($created_by) < 7) {
+        $errors['created_by'] =  1;
 
-                 $conn->close();
+    }
+    if (strlen($image) < 6 ) {
+        $errors['image'] = 1;
+    }
 
-             }
-    } 
+}
 
 ?>
+
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
 
@@ -1015,7 +1029,7 @@ if (strlen($date_created) < 6) {
 												<span class="m-menu__arrow"></span>
 												<ul class="m-menu__subnav">
 													<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
-														<a href="add.php" class="m-menu__link ">
+														<a href="../categories/add.php" class="m-menu__link ">
 															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																<span></span>
 															</i>
@@ -1023,7 +1037,7 @@ if (strlen($date_created) < 6) {
 														</a>
 													</li>
 													<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
-														<a href="list.php" class="m-menu__link ">
+														<a href="../categories/list.php" class="m-menu__link ">
 															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																<span></span>
 															</i>
@@ -1079,7 +1093,7 @@ if (strlen($date_created) < 6) {
 												<span class="m-menu__arrow"></span>
 												<ul class="m-menu__subnav">
 													<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
-														<a href="../posts/add.php" class="m-menu__link ">
+														<a href="add.php" class="m-menu__link ">
 															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																<span></span>
 															</i>
@@ -1087,7 +1101,7 @@ if (strlen($date_created) < 6) {
 														</a>
 													</li>
 													<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
-														<a href="../posts/list.php" class="m-menu__link ">
+														<a href="list.php" class="m-menu__link ">
 															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																<span></span>
 															</i>
@@ -1099,6 +1113,159 @@ if (strlen($date_created) < 6) {
 										</li>
                                                 </ul>
 											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
+							
+								<div class="m-menu__submenu ">
+									<span class="m-menu__arrow"></span>
+									<ul class="m-menu__subnav">
+										<li class="m-menu__item " aria-haspopup="true">
+											<a href="../../components/icons/flaticon.html" class="m-menu__link ">
+												<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+													<span></span>
+												</i>
+												<span class="m-menu__link-text">Flaticon</span>
+											</a>
+										</li>
+										<li class="m-menu__item " aria-haspopup="true">
+											<a href="../../components/icons/fontawesome5.html" class="m-menu__link ">
+												<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+													<span></span>
+												</i>
+												<span class="m-menu__link-text">Fontawesome 5</span>
+											</a>
+										</li>
+										<li class="m-menu__item " aria-haspopup="true">
+											<a href="../../components/icons/lineawesome.html" class="m-menu__link ">
+												<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+													<span></span>
+												</i>
+												<span class="m-menu__link-text">Lineawesome</span>
+											</a>
+										</li>
+										<li class="m-menu__item " aria-haspopup="true">
+											<a href="../../components/icons/socicons.html" class="m-menu__link ">
+												<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+													<span></span>
+												</i>
+												<span class="m-menu__link-text">Socicons</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
+							
+								<div class="m-menu__submenu ">
+									<span class="m-menu__arrow"></span>
+									<ul class="m-menu__subnav">
+										<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
+											<span class="m-menu__link">
+												<span class="m-menu__link-text">Buttons</span>
+											</span>
+										</li>
+										<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
+											<a href="javascript:;" class="m-menu__link m-menu__toggle">
+												<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+													<span></span>
+												</i>
+												<span class="m-menu__link-text">Button Base</span>
+												<i class="m-menu__ver-arrow la la-angle-right"></i>
+											</a>
+											<div class="m-menu__submenu ">
+												<span class="m-menu__arrow"></span>
+												<ul class="m-menu__subnav">
+													<li class="m-menu__item " aria-haspopup="true">
+														<a href="../../components/buttons/base/default.html" class="m-menu__link ">
+															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+																<span></span>
+															</i>
+															<span class="m-menu__link-text">Default Style</span>
+														</a>
+													</li>
+													<li class="m-menu__item " aria-haspopup="true">
+														<a href="../../components/buttons/base/square.html" class="m-menu__link ">
+															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+																<span></span>
+															</i>
+															<span class="m-menu__link-text">Square Style</span>
+														</a>
+													</li>
+													<li class="m-menu__item " aria-haspopup="true">
+														<a href="../../components/buttons/base/pill.html" class="m-menu__link ">
+															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+																<span></span>
+															</i>
+															<span class="m-menu__link-text">Pill Style</span>
+														</a>
+													</li>
+													<li class="m-menu__item " aria-haspopup="true">
+														<a href="../../components/buttons/base/air.html" class="m-menu__link ">
+															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+																<span></span>
+															</i>
+															<span class="m-menu__link-text">Air Style</span>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</li>
+										<li class="m-menu__item " aria-haspopup="true">
+											<a href="../../components/buttons/group.html" class="m-menu__link ">
+												<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+													<span></span>
+												</i>
+												<span class="m-menu__link-text">Button Group</span>
+											</a>
+										</li>
+										<li class="m-menu__item " aria-haspopup="true">
+											<a href="../../components/buttons/dropdown.html" class="m-menu__link ">
+												<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+													<span></span>
+												</i>
+												<span class="m-menu__link-text">Button Dropdown</span>
+											</a>
+										</li>
+										<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
+											<a href="javascript:;" class="m-menu__link m-menu__toggle">
+												<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+													<span></span>
+												</i>
+												<span class="m-menu__link-text">Button Icon</span>
+												<i class="m-menu__ver-arrow la la-angle-right"></i>
+											</a>
+											<div class="m-menu__submenu ">
+												<span class="m-menu__arrow"></span>
+												<ul class="m-menu__subnav">
+													<li class="m-menu__item " aria-haspopup="true">
+														<a href="../../components/buttons/icon/lineawesome.html" class="m-menu__link ">
+															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+																<span></span>
+															</i>
+															<span class="m-menu__link-text">Lineawesome Icons</span>
+														</a>
+													</li>
+													<li class="m-menu__item " aria-haspopup="true">
+														<a href="../../components/buttons/icon/fontawesome.html" class="m-menu__link ">
+															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+																<span></span>
+															</i>
+															<span class="m-menu__link-text">Fontawesome Icons</span>
+														</a>
+													</li>
+													<li class="m-menu__item " aria-haspopup="true">
+														<a href="../../components/buttons/icon/flaticon.html" class="m-menu__link ">
+															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+																<span></span>
+															</i>
+															<span class="m-menu__link-text">Flaticon Icons</span>
+														</a>
+													</li>
+												</ul>
+											</div>
 										</li>
 									</ul>
 								</div>
@@ -1211,34 +1378,63 @@ if (strlen($date_created) < 6) {
 													<i class="la la-gear"></i>
 												</span>
 												<h3 class="m-portlet__head-text">
-													Add Categories
+													Add Posts
 												</h3>
 											</div>
 										</div>
 									</div>
 
 									<!--begin::Form-->
-									<form action="add.php" method="POST" class="m-form m-form--fit m-form--label-align-right">
+									<form actions="add.php" method="POST" class="m-form m-form--fit m-form--label-align-right">
 										<div class="m-portlet__body">
 											<div class="form-group m-form__group">
-												<label >Username</label>
-												<input type="text" class="form-control m-input"  value="<?php echo $username;?>" name="username">
-												<?php if (isset($errors['username'])): ?>
+												<label >Title</label>
+												<input type="text" class="form-control m-input" value="<?php echo $title;?>" name="title">
+												<?php if (isset($errors['title'])): ?>
+													<div class="alert alert-primary mt-1" role="alert">
+														nhap lai !
+													</div>
+												<?php endif; ?>
+											</div>
+											<div class="form-group m-form__group">
+												<label for="exampleTextarea">Description</label>
+												<textarea class="form-control m-input" name="description" id="exampleTextarea" rows="3"><?php echo $description;?></textarea>
+												<?php if (isset($errors['description'])): ?>
 												<div class="alert alert-primary mt-1" role="alert">
-													nhập tên !
+													content !
 												</div>
 											<?php endif; ?>
-
-											</div>										
+											</div>
 											<div class="form-group m-form__group">
 												<label >Date created</label>
 												<input type="text" class="form-control m-input" value="<?php echo $date_created;?>" name="date_created">
 												<?php if (isset($errors['date_created'])): ?>
 												<div class="alert alert-primary mt-1" role="alert">
-													hsd!
+													hay nhập lại pass !
 												</div>
 											<?php endif; ?>
-											</div>											
+											</div>
+											<div class="form-group m-form__group">
+												<select class="form-control m-input" id="exampleSelect1" value="<?php echo $created_by;?>" name="created_by">
+												<option>Created by</option>
+												</select>
+													<?php if (isset($errors['created_by'])): ?>
+													<div class="alert alert-primary mt-1" role="alert">
+													nguoi tao !
+													</div>
+												<?php endif; ?>
+                                            </div>   
+											<div class="form-group m-form__group">
+												<label >Image</label>
+												<input type="text" class="form-control m-input" value="<?php echo $image;?>" name="image">
+												<?php if (isset($errors['image'])): ?>
+											<div class="alert alert-primary mt-1" role="alert">
+												image !
+											</div>
+										<?php endif; ?>
+													</div>
+										
+										</div>
 										<div class="m-portlet__foot m-portlet__foot--fit">
 											<div class="m-form__actions">
 												<button type="submit" class="btn btn-primary" name="btn_frmRegister">Add New</button>

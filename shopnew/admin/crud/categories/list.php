@@ -1251,26 +1251,34 @@ License: You must have a valid license purchased only from themeforest(the above
 											<th>Actions</th>
 										</tr>
 									</thead>
-									<tbody>
+									<?php
+										$conn = new mysqli('localhost','root','','myadmin');
+
+										$sql = "SELECT * FROM categories";
+										$results = $conn->query($sql)->fetch_all();
+										foreach ($results as $r){
+										?>
 										<tr>
-											<td>1</td>
-											<td>Thời trang</td>
-											<td>12/12/2020</th>
-											<td nowrap="">
-                        <span class="dropdown">
-                            <a href="#" class="btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown" aria-expanded="false">
-                              <i class="la la-ellipsis-h"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-32px, 26px, 0px);">
-                                <a class="dropdown-item" href="#"><i class="la la-edit"></i> Edit Details</a>
-                                <a class="dropdown-item" href="#"><i class="la la-leaf"></i> Update Status</a>
-                                <a class="dropdown-item" href="#"><i class="la la-print"></i> Generate Report</a>
-                            </div>
-                        </span>
-                        <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="View">
-                          <i class="la la-edit"></i>
-                        </a></td>
-										</tr>								
+											<th scope="row"><?php echo $r[0];?></th>
+											<td><?php echo $r[1];?></td>
+											<td><?php echo $r[2];?></td>
+											<td>
+											<span class="dropdown">
+											<a href="#" class="btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown" aria-expanded="false">
+											<i class="la la-ellipsis-h"></i>
+											</a>
+											<div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-32px, 26px, 0px);">
+
+												  <a class="la la-edit" href="edit.php?id=<?php echo $r[0]; ?>">Edit</a>
+												  <a class="la la-edit" href="del.php?id=<?php echo $r[0]; ?>">Del</a>
+											</div>
+										</span>
+											</td>
+										</tr>
+										<?php
+											}
+											?>
+								 </table>							
 									</tbody>
 								</table>
 							</div>

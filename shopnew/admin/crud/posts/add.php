@@ -91,21 +91,28 @@ if (strlen( $date_created ) < 6) {
     }
 
 }
+          // Create connection
+		  $conn = new mysqli('localhost', 'root','','myadmin');
+		  // Check connection
+		  if ($conn->connect_error) {
+			  die("Connection failed: " . $conn->connect_error);
+		  }
+		  if ($errors == []) {
+			  $sql = "INSERT INTO posts (title,description,date_created,created_by,image )
+		 VALUES ('" . $title . "','" . $description . "','" . $date_created . "','" . $created_by . "','" . $image . "')";
 
-/*$servername = "localhost";
-$username = "root";
-$password ="";
-$dbname = "fix";
-//create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// check connection
-if (!$conn) {
-    die("Connection failed:" . $conn->connect_error);
-*/
+			  if ($conn->query($sql) === TRUE) {
+				  echo "New record created successfully";
+			  } else {
+				  echo "Error: " . $sql . "<br>" . $conn->error;
+			  }
 
+			  $conn->close();
 
+		  }
 
 ?>
+
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
 
