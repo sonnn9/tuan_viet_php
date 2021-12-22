@@ -59,14 +59,18 @@ License: You must have a valid license purchased only from themeforest(the above
 	if($conn->connect_error){
 		echo "Connetion failed: ".$conn->connect_error;
 	}
-	$errors = [];
-	$user = '';
-	$password = '';
-	$fullname = '';
-	$email = '';
-	$phone = '';
-	$date_created = '';
-	if(isset($_POST['btn_addUser'])){
+    $id = $_GET['id'];
+    $sql_id = "SELECT * FROM users WHERE id=" . $id;
+    $detail = $conn->query($sql_id);
+    $detail = $detail->fetch_object();
+    $user = $detail->username;
+	$password = $detail->password;
+	$fullname = $detail->fullname;
+	$email = $detail->email;
+	$phone = $detail->phone;
+	$date_created = $detail->date_created;
+    $errors = [];
+	if(isset($_POST['btn_editUser'])){
 		$user = $_POST['username'];
 		$password = $_POST['password'];
 		$fullname = $_POST['fullname'];
@@ -93,14 +97,14 @@ License: You must have a valid license purchased only from themeforest(the above
 		if(strlen($date_created) <= 5){
 			$errors['date_created'] = 1;
 		}
-		if($errors ==[]){
-		$sql = "INSERT INTO users (username, password, fullname, email, phone, date_created) VALUES ('".$user."', '".$password."', '".$fullname."','".$email."','".$phone."','".$date_created."')";
-		if ($conn->query($sql) === TRUE) {
-		echo "A new user has been created!";
-		} else {
-		echo "Error: " . $sql . "<br>" . $conn->error;
-		}
-	}
+        if ($errors == []) {
+            $sql_update = "UPDATE users SET username = '" . $user . "', password = '" . $password . "', fullname = '" . $fullname . "', email = '" . $email . "', phone = '" . $phone . "', date_created = '" . $date_created . "' where id =" . $id;
+            if ($conn->query($sql_update) === TRUE) {
+                header('Location: http://localhost/tuan_viet_php/shopnew/admin/crud/users/list.php');
+            } else {
+                echo "Error: " . $sql_update . "<br>" . $conn->error;
+            }
+        }
 }
 	?>	
 	
@@ -1228,7 +1232,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									</div>
 
 									<!--begin::Form-->
-									<form method="post" action="add.php" class="m-form m-form--fit m-form--label-align-right">
+									<form method="post" action="edit.php?id=<?php echo $id;?>" class="m-form m-form--fit m-form--label-align-right">
 										<div class="m-portlet__body">
 											<div class="form-group m-form__group">
 												<label >Username</label>
@@ -1287,7 +1291,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										</div>
 										<div class="m-portlet__foot m-portlet__foot--fit">
 											<div class="m-form__actions">
-												<button type="submit" name="btn_addUser" class="btn btn-primary">Add New</button>
+												<button type="submit" name="btn_editUser" class="btn btn-primary">Add New</button>
 												<button type="reset" class="btn btn-secondary">Cancel</button>
 											</div>
 										</div>
