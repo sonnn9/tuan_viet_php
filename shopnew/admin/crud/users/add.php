@@ -73,6 +73,28 @@ License: You must have a valid license purchased only from themeforest(the above
 		$email = $_POST['email'];
 		$phone = $_POST['phone'];
 		$date_created = $_POST['date_created'];
+
+
+
+		$target_dir = $_SERVER['DOCUMENT_ROOT'] . "/tuan_viet_php/upload/";
+		$target_file = $target_dir . basename($_FILES["avatar"]["name"]);
+		$avartar = "/upload/avatar/". $_FILES["avatar"]["name"];
+		var_dump(($avartar));die;
+		$uploadOk = 1;
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		// Check if image file is a actual image or fake image
+		  $check = getimagesize($_FILES["avatar"]["tmp_name"]);
+		 
+
+		  if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file)) {
+			echo "The file ". htmlspecialchars( basename( $_FILES["avatar"]["name"])). " has been uploaded.";
+  
+		} else {
+			echo "Sorry, there was an error uploading your file.";
+
+		  }
+
+
 		if(strlen($user) <= 3 || strlen($user) > 20 || !ctype_alnum($user)){
 			$errors['username'] = 1;
 		}
@@ -395,9 +417,10 @@ License: You must have a valid license purchased only from themeforest(the above
 											</div>
 										</div>
 									</div>
+							
 
 									<!--begin::Form-->
-									<form method="post" action="add.php" class="m-form m-form--fit m-form--label-align-right">
+									<form method="post" enctype="multipart/form-data" action="add.php" class="m-form m-form--fit m-form--label-align-right">
 										<div class="m-portlet__body">
 											<div class="form-group m-form__group">
 												<label >Username</label>
@@ -408,6 +431,11 @@ License: You must have a valid license purchased only from themeforest(the above
  												 Username required!
 												</div>
 												<?php endif;?>
+
+											<div class="form-group m-form__group">
+												<label >Avartar</label>
+												<input type="file" name="avatar"  class="form-control m-input">
+											</div>
 											<div class="form-group m-form__group">
 												<label >Password</label>
 												<input type="password" name="password" value="<?php echo $password; ?>" class="form-control m-input">
