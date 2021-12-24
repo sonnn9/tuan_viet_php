@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<?php $path = "http://localhost/tuan_viet_php/shopnew/admin/"; ?>
+<?php $path = "http://localhost/tuan_viet_php/shopnew/admin/";
+$host = "http://localhost/tuan_viet_php";
+?>
+
 
 
 <html lang="en">
@@ -152,6 +155,11 @@
 											</div>
 										<?php endif; ?>
 										<div class="form-group m-form__group">
+											<label>Avartar</label>
+											<input type="file" name="avatar" class="form-control m-input">
+										</div>
+										<div><img src="<?php echo $host . $avartar; ?>"></div>
+										<div class="form-group m-form__group">
 											<label>Password</label>
 											<input type="password" name="password" value="<?php echo $password; ?>" class="form-control m-input">
 										</div>
@@ -219,7 +227,7 @@
 	<!-- end:: Body -->
 
 	<!-- begin::Footer -->
-	
+
 	<?php require_once("../layouts/footer.php"); ?>
 
 	<!-- end:: Page -->

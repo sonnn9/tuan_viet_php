@@ -65,7 +65,6 @@
 		$email = $_POST['email'];
 		$phone = $_POST['phone'];
 		$date_created = $_POST['date_created'];
-
 		$target_dir = $_SERVER['DOCUMENT_ROOT'] . "/tuan_viet_php/upload/avatar/";
 		$target_file = $target_dir . basename($_FILES["avatar"]["name"]);
 		$avartar = "/upload/avatar/" . $_FILES["avatar"]["name"];
