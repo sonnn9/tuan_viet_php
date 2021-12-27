@@ -64,6 +64,8 @@ $host = "http://localhost/tuan_viet_php";
 	$email = $detail->email;
 	$phone = $detail->phone;
 	$date_created = $detail->date_created;
+	$avartar = $detail->avartar;
+	$host = "http://localhost/tuan_viet_php";
 	$errors = [];
 	if (isset($_POST['btn_editUser'])) {
 		$user = $_POST['username'];
@@ -72,6 +74,38 @@ $host = "http://localhost/tuan_viet_php";
 		$email = $_POST['email'];
 		$phone = $_POST['phone'];
 		$date_created = $_POST['date_created'];
+
+		$target_dir = $_SERVER['DOCUMENT_ROOT'] . "/tuan_viet_php/upload/avatar/";
+		$target_file = $target_dir . basename($_FILES["avatar"]["name"]);
+		$avartar = "/upload/avatar/" . $_FILES["avatar"]["name"];
+		$uploadOk = 1;
+		$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+		// Check if image file is a actual image or fake image
+		$check = getimagesize($_FILES["avatar"]["tmp_name"]);
+		if ($check == false) {
+			echo "File is not an image.";
+			$uploadOk = 0;
+		}
+		if (file_exists($target_file)) {
+			echo "Sorry, file already exists.";
+			$uploadOk = 0;
+		}
+		if ($_FILES["avatar"]["size"] > 500000) {
+			echo "Sorry, your file is too large.";
+			$uploadOk = 0;
+		}
+		if ($uploadOk == 0) {
+			$error['avatar'] = 1;
+			echo "Sorry, your file was not uploaded.";
+			// if everything is ok, try to upload file
+		} else {
+			if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file)) {
+				echo "The file " . htmlspecialchars(basename($_FILES["avatar"]["name"])) . " has been uploaded.";
+			} else {
+				echo "Sorry, there was an error uploading your file.";
+			}
+		}
+
 		if (strlen($user) <= 3 || strlen($user) > 20 || !ctype_alnum($user)) {
 			$errors['username'] = 1;
 		}
@@ -93,7 +127,7 @@ $host = "http://localhost/tuan_viet_php";
 			$errors['date_created'] = 1;
 		}
 		if ($errors == []) {
-			$sql_update = "UPDATE users SET username = '" . $user . "', password = '" . $password . "', fullname = '" . $fullname . "', email = '" . $email . "', phone = '" . $phone . "', date_created = '" . $date_created . "' where id =" . $id;
+			$sql_update = "UPDATE users SET username = '" . $user . "', password = '" . $password . "', fullname = '" . $fullname . "', email = '" . $email . "', phone = '" . $phone . "', date_created = '" . $date_created . "', avartar = '" . $avartar . "' where id =" . $id;
 			if ($conn->query($sql_update) === TRUE) {
 				header('Location: http://localhost/tuan_viet_php/shopnew/admin/crud/users/list.php');
 			} else {
@@ -143,7 +177,7 @@ $host = "http://localhost/tuan_viet_php";
 								</div>
 
 								<!--begin::Form-->
-								<form method="post" action="edit.php?id=<?php echo $id; ?>" class="m-form m-form--fit m-form--label-align-right">
+								<form method="post" enctype="multipart/form-data" action="edit.php?id=<?php echo $id; ?>" class="m-form m-form--fit m-form--label-align-right">
 									<div class="m-portlet__body">
 										<div class="form-group m-form__group">
 											<label>Username</label>
