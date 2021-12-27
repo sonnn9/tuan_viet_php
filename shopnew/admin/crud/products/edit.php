@@ -1,17 +1,6 @@
 <!DOCTYPE html>
+<?php $path = "http://localhost/tuan_viet_php/shopnew/admin/"; ?>
 
-<!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
 <html lang="en">
 
 	<!-- begin::Head -->
@@ -37,15 +26,15 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--end::Web font -->
 
 		<!--begin::Base Styles -->
-		<link href="../../assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo $path;?>assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
 
-		<!--RTL version:<link href="../../assets/vendors/base/vendors.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
-		<link href="../../assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
+		<!--RTL version:<link href="<?php echo $path;?>assets/vendors/base/vendors.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
+		<link href="<?php echo $path;?>assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
 
-		<!--RTL version:<link href="../../assets/demo/default/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
+		<!--RTL version:<link href="<?php echo $path;?>assets/demo/default/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
 
 		<!--end::Base Styles -->
-		<link rel="shortcut icon" href="../../assets/demo/default/media/img/logo/favicon.ico" />
+		<link rel="shortcut icon" href="<?php echo $path;?>assets/demo/default/media/img/logo/favicon.ico" />
 	</head>
 
 	<!-- end::Head -->
@@ -125,8 +114,8 @@ $conn->close();
 						<div class="m-stack__item m-brand  m-brand--skin-dark ">
 							<div class="m-stack m-stack--ver m-stack--general">
 								<div class="m-stack__item m-stack__item--middle m-brand__logo">
-									<a href="../../index.php" class="m-brand__logo-wrapper">
-										<img alt="" src="../../assets/demo/default/media/img/logo/logo_default_dark.png" />
+									<a href="<?php echo $path;?>index.php" class="m-brand__logo-wrapper">
+										<img alt="" src="<?php echo $path;?>assets/demo/default/media/img/logo/logo_default_dark.png" />
 									</a>
 								</div>
 								<div class="m-stack__item m-stack__item--middle m-brand__tools">
@@ -182,13 +171,13 @@ $conn->close();
 											<span class="m-menu__arrow m-menu__arrow--adjust"></span>
 											<ul class="m-menu__subnav">
 												<li class="m-menu__item " aria-haspopup="true">
-													<a href="../../header/actions.html" class="m-menu__link ">
+													<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 														<i class="m-menu__link-icon flaticon-file"></i>
 														<span class="m-menu__link-text">Create New Post</span>
 													</a>
 												</li>
 												<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-													<a href="../../header/actions.html" class="m-menu__link ">
+													<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 														<i class="m-menu__link-icon flaticon-diagram"></i>
 														<span class="m-menu__link-title">
 															<span class="m-menu__link-wrap">
@@ -211,32 +200,32 @@ $conn->close();
 														<span class="m-menu__arrow "></span>
 														<ul class="m-menu__subnav">
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Latest Orders</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Pending Orders</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Processed Orders</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Delivery Reports</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Payments</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Customers</span>
 																</a>
 															</li>
@@ -254,27 +243,27 @@ $conn->close();
 														<span class="m-menu__arrow "></span>
 														<ul class="m-menu__subnav">
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Customer Feedbacks</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Supplier Feedbacks</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Reviewed Feedbacks</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Resolved Feedbacks</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Feedback Reports</span>
 																</a>
 															</li>
@@ -282,7 +271,7 @@ $conn->close();
 													</div>
 												</li>
 												<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-													<a href="../../header/actions.html" class="m-menu__link ">
+													<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 														<i class="m-menu__link-icon flaticon-users"></i>
 														<span class="m-menu__link-text">Register Member</span>
 													</a>
@@ -308,31 +297,31 @@ $conn->close();
 														</h3>
 														<ul class="m-menu__inner">
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-map"></i>
 																	<span class="m-menu__link-text">Annual Reports</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-user"></i>
 																	<span class="m-menu__link-text">HR Reports</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-clipboard"></i>
 																	<span class="m-menu__link-text">IPO Reports</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-graphic-1"></i>
 																	<span class="m-menu__link-text">Finance Margins</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-graphic-2"></i>
 																	<span class="m-menu__link-text">Revenue Reports</span>
 																</a>
@@ -346,7 +335,7 @@ $conn->close();
 														</h3>
 														<ul class="m-menu__inner">
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-bullet m-menu__link-bullet--line">
 																		<span></span>
 																	</i>
@@ -354,7 +343,7 @@ $conn->close();
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-bullet m-menu__link-bullet--line">
 																		<span></span>
 																	</i>
@@ -362,7 +351,7 @@ $conn->close();
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-bullet m-menu__link-bullet--line">
 																		<span></span>
 																	</i>
@@ -370,7 +359,7 @@ $conn->close();
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-bullet m-menu__link-bullet--line">
 																		<span></span>
 																	</i>
@@ -378,7 +367,7 @@ $conn->close();
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-bullet m-menu__link-bullet--line">
 																		<span></span>
 																	</i>
@@ -386,7 +375,7 @@ $conn->close();
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-bullet m-menu__link-bullet--line">
 																		<span></span>
 																	</i>
@@ -402,7 +391,7 @@ $conn->close();
 														</h3>
 														<ul class="m-menu__inner">
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																		<span></span>
 																	</i>
@@ -410,7 +399,7 @@ $conn->close();
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																		<span></span>
 																	</i>
@@ -418,7 +407,7 @@ $conn->close();
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																		<span></span>
 																	</i>
@@ -426,7 +415,7 @@ $conn->close();
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																		<span></span>
 																	</i>
@@ -434,7 +423,7 @@ $conn->close();
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																		<span></span>
 																	</i>
@@ -442,7 +431,7 @@ $conn->close();
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 																		<span></span>
 																	</i>
@@ -458,32 +447,32 @@ $conn->close();
 														</h3>
 														<ul class="m-menu__inner">
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Report Adjusments</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Sources & Mediums</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Reporting Settings</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Conversions</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Report Flows</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<span class="m-menu__link-text">Audit & Logs</span>
 																</a>
 															</li>
@@ -511,13 +500,13 @@ $conn->close();
 											<span class="m-menu__arrow m-menu__arrow--adjust"></span>
 											<ul class="m-menu__subnav">
 												<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-													<a href="../../header/actions.html" class="m-menu__link ">
+													<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 														<i class="m-menu__link-icon flaticon-business"></i>
 														<span class="m-menu__link-text">eCommerce</span>
 													</a>
 												</li>
 												<li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover" m-menu-link-redirect="1" aria-haspopup="true">
-													<a href="../../crud/datatable_v1.html" class="m-menu__link m-menu__toggle">
+													<a href="<?php echo $path;?>crud/datatable_v1.html" class="m-menu__link m-menu__toggle">
 														<i class="m-menu__link-icon flaticon-computer"></i>
 														<span class="m-menu__link-text">Audience</span>
 														<i class="m-menu__hor-arrow la la-angle-right"></i>
@@ -527,31 +516,31 @@ $conn->close();
 														<span class="m-menu__arrow "></span>
 														<ul class="m-menu__subnav">
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-users"></i>
 																	<span class="m-menu__link-text">Active Users</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-interface-1"></i>
 																	<span class="m-menu__link-text">User Explorer</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-lifebuoy"></i>
 																	<span class="m-menu__link-text">Users Flows</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-graphic-1"></i>
 																	<span class="m-menu__link-text">Market Segments</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-graphic"></i>
 																	<span class="m-menu__link-text">User Reports</span>
 																</a>
@@ -560,13 +549,13 @@ $conn->close();
 													</div>
 												</li>
 												<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-													<a href="../../header/actions.html" class="m-menu__link ">
+													<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 														<i class="m-menu__link-icon flaticon-map"></i>
 														<span class="m-menu__link-text">Marketing</span>
 													</a>
 												</li>
 												<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-													<a href="../../header/actions.html" class="m-menu__link ">
+													<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 														<i class="m-menu__link-icon flaticon-graphic-2"></i>
 														<span class="m-menu__link-title">
 															<span class="m-menu__link-wrap">
@@ -589,7 +578,7 @@ $conn->close();
 														<span class="m-menu__arrow "></span>
 														<ul class="m-menu__subnav">
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-add"></i>
 																	<span class="m-menu__link-title">
 																		<span class="m-menu__link-wrap">
@@ -602,19 +591,19 @@ $conn->close();
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-signs-1"></i>
 																	<span class="m-menu__link-text">File Attributes</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-folder"></i>
 																	<span class="m-menu__link-text">Folders</span>
 																</a>
 															</li>
 															<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-																<a href="../../header/actions.html" class="m-menu__link ">
+																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-cogwheel-2"></i>
 																	<span class="m-menu__link-text">System Settings</span>
 																</a>
@@ -675,7 +664,7 @@ $conn->close();
 											<div class="m-dropdown__wrapper">
 												<span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
 												<div class="m-dropdown__inner">
-													<div class="m-dropdown__header m--align-center" style="background: url(../../assets/app/media/img/misc/notification_bg.jpg); background-size: cover;">
+													<div class="m-dropdown__header m--align-center" style="background: url(<?php echo $path;?>assets/app/media/img/misc/notification_bg.jpg); background-size: cover;">
 														<span class="m-dropdown__header-title">9 New</span>
 														<span class="m-dropdown__header-subtitle">User Notifications</span>
 													</div>
@@ -814,7 +803,7 @@ $conn->close();
 											<div class="m-dropdown__wrapper">
 												<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
 												<div class="m-dropdown__inner">
-													<div class="m-dropdown__header m--align-center" style="background: url(../../assets/app/media/img/misc/quick_actions_bg.jpg); background-size: cover;">
+													<div class="m-dropdown__header m--align-center" style="background: url(<?php echo $path;?>assets/app/media/img/misc/quick_actions_bg.jpg); background-size: cover;">
 														<span class="m-dropdown__header-title">Quick Actions</span>
 														<span class="m-dropdown__header-subtitle">Shortcuts</span>
 													</div>
@@ -852,17 +841,17 @@ $conn->close();
 										<li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
 											<a href="#" class="m-nav__link m-dropdown__toggle">
 												<span class="m-topbar__userpic">
-													<img src="../../assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless" alt="" />
+													<img src="<?php echo $path;?>assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless" alt="" />
 												</span>
 												<span class="m-topbar__username m--hide">Nick</span>
 											</a>
 											<div class="m-dropdown__wrapper">
 												<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
 												<div class="m-dropdown__inner">
-													<div class="m-dropdown__header m--align-center" style="background: url(../../assets/app/media/img/misc/user_profile_bg.jpg); background-size: cover;">
+													<div class="m-dropdown__header m--align-center" style="background: url(<?php echo $path;?>assets/app/media/img/misc/user_profile_bg.jpg); background-size: cover;">
 														<div class="m-card-user m-card-user--skin-dark">
 															<div class="m-card-user__pic">
-																<img src="../../assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless" alt="" />
+																<img src="<?php echo $path;?>assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless" alt="" />
 
 																<!--
 						<span class="m-type m-type--lg m--bg-danger"><span class="m--font-light">S<span><span>
@@ -881,7 +870,7 @@ $conn->close();
 																	<span class="m-nav__section-text">Section</span>
 																</li>
 																<li class="m-nav__item">
-																	<a href="../../header/profile.html" class="m-nav__link">
+																	<a href="<?php echo $path;?>header/profile.html" class="m-nav__link">
 																		<i class="m-nav__link-icon flaticon-profile-1"></i>
 																		<span class="m-nav__link-title">
 																			<span class="m-nav__link-wrap">
@@ -894,13 +883,13 @@ $conn->close();
 																	</a>
 																</li>
 																<li class="m-nav__item">
-																	<a href="../../header/profile.html" class="m-nav__link">
+																	<a href="<?php echo $path;?>header/profile.html" class="m-nav__link">
 																		<i class="m-nav__link-icon flaticon-share"></i>
 																		<span class="m-nav__link-text">Activity</span>
 																	</a>
 																</li>
 																<li class="m-nav__item">
-																	<a href="../../header/profile.html" class="m-nav__link">
+																	<a href="<?php echo $path;?>header/profile.html" class="m-nav__link">
 																		<i class="m-nav__link-icon flaticon-chat-1"></i>
 																		<span class="m-nav__link-text">Messages</span>
 																	</a>
@@ -908,13 +897,13 @@ $conn->close();
 																<li class="m-nav__separator m-nav__separator--fit">
 																</li>
 																<li class="m-nav__item">
-																	<a href="../../header/profile.html" class="m-nav__link">
+																	<a href="<?php echo $path;?>header/profile.html" class="m-nav__link">
 																		<i class="m-nav__link-icon flaticon-info"></i>
 																		<span class="m-nav__link-text">FAQ</span>
 																	</a>
 																</li>
 																<li class="m-nav__item">
-																	<a href="../../header/profile.html" class="m-nav__link">
+																	<a href="<?php echo $path;?>header/profile.html" class="m-nav__link">
 																		<i class="m-nav__link-icon flaticon-lifebuoy"></i>
 																		<span class="m-nav__link-text">Support</span>
 																	</a>
@@ -922,7 +911,7 @@ $conn->close();
 																<li class="m-nav__separator m-nav__separator--fit">
 																</li>
 																<li class="m-nav__item">
-																	<a href="../../snippets/pages/user/login-1.html" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Logout</a>
+																	<a href="<?php echo $path;?>snippets/pages/user/login-1.html" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Logout</a>
 																</li>
 															</ul>
 														</div>
@@ -962,7 +951,7 @@ $conn->close();
 					<div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark " m-menu-vertical="1" m-menu-scrollable="1" m-menu-dropdown-timeout="500" style="position: relative;">
 						<ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
 							<li class="m-menu__item " aria-haspopup="true">
-								<a href="../../index.php" class="m-menu__link ">
+								<a href="<?php echo $path;?>index.php" class="m-menu__link ">
 									<i class="m-menu__link-icon flaticon-line-graph"></i>
 									<span class="m-menu__link-title">
 										<span class="m-menu__link-wrap">
@@ -1394,7 +1383,7 @@ $conn->close();
 								<div class="m-messenger__wrapper">
 									<div class="m-messenger__message m-messenger__message--in">
 										<div class="m-messenger__message-pic">
-											<img src="../../assets/app/media/img//users/user3.jpg" alt="" />
+											<img src="<?php echo $path;?>assets/app/media/img//users/user3.jpg" alt="" />
 										</div>
 										<div class="m-messenger__message-body">
 											<div class="m-messenger__message-arrow"></div>
@@ -1424,7 +1413,7 @@ $conn->close();
 								<div class="m-messenger__wrapper">
 									<div class="m-messenger__message m-messenger__message--in">
 										<div class="m-messenger__message-pic">
-											<img src="../../assets/app/media/img//users/user3.jpg" alt="" />
+											<img src="<?php echo $path;?>assets/app/media/img//users/user3.jpg" alt="" />
 										</div>
 										<div class="m-messenger__message-body">
 											<div class="m-messenger__message-arrow"></div>
@@ -1455,7 +1444,7 @@ $conn->close();
 								<div class="m-messenger__wrapper">
 									<div class="m-messenger__message m-messenger__message--in">
 										<div class="m-messenger__message-pic">
-											<img src="../../assets/app/media/img//users/user3.jpg" alt="" />
+											<img src="<?php echo $path;?>assets/app/media/img//users/user3.jpg" alt="" />
 										</div>
 										<div class="m-messenger__message-body">
 											<div class="m-messenger__message-arrow"></div>
@@ -1528,7 +1517,7 @@ $conn->close();
 								<div class="m-messenger__wrapper">
 									<div class="m-messenger__message m-messenger__message--in">
 										<div class="m-messenger__message-pic">
-											<img src="../../assets/app/media/img//users/user3.jpg" alt="" />
+											<img src="<?php echo $path;?>assets/app/media/img//users/user3.jpg" alt="" />
 										</div>
 										<div class="m-messenger__message-body">
 											<div class="m-messenger__message-arrow"></div>
@@ -1867,8 +1856,8 @@ $conn->close();
 		<!-- begin::Quick Nav -->
 
 		<!--begin::Base Scripts -->
-		<script src="../../assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
-		<script src="../../assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
+		<script src="<?php echo $path;?>assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
+		<script src="<?php echo $path;?>assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
 
 		<!--end::Base Scripts -->
 	</body>
