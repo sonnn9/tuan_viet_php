@@ -8,17 +8,25 @@ class Databases
     private $userhost = 'root';
     private $passhost = '';
     private $dbname = 'myadmin';
-    private $conn = NULL;
+    private $__conn = NULL;
     private $result = NULL;
 
-    public function connect()
+    function connect()
     {
-        $this->conn = new mysqli($this->hostname, $this->userhost, $this->passhost, $this->dbname);
+        // Nếu chưa kết nối thì thực hiện kết nối
+        if (!$this->__conn){
+            // Kết nối
+            $this->__conn = mysqli_connect('localhost', 'root', '', 'myadmin') or die ('Lỗi kết nối');
+
+            // Xử lý truy vấn UTF8 để tránh lỗi font
+            mysqli_query($this->__conn, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
+        }
     }
+
 
     public function query($sql)
     {
-        $this->result = $this->conn->query($sql);
+        $this->result = $this->__conn->query($sql);
     }
 
 }
