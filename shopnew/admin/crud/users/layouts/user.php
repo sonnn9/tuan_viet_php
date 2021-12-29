@@ -14,6 +14,7 @@ class Users
 
     function add_user($post, $file)
     {
+        $errors = [];
         $user = $post['username'];
         $password = $post['password'];
         $fullname = $post['fullname'];
@@ -23,32 +24,22 @@ class Users
         $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/tuan_viet_php/upload/avatar/";
         $target_file = $target_dir . basename($file["avatar"]["name"]);
         $avartar = "/upload/avatar/" . $file["avatar"]["name"];
-        $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         // Check if image file is a actual image or fake image
-        $check = getimagesize($file["avatar"]["tmp_name"]);
-        if ($check == false) {
-            $error['avatar'] = 1;
+
+        if ($file["avatar"]["tmp_name"] != '') {
+            getimagesize($file["avatar"]["tmp_name"]);
+        } else {
+            $errors['avatar'] = 1;
         }
         if (file_exists($target_file)) {
-            $error['avatar'] = 1;
+            $errors['avatar'] = 1;
 
         }
         if ($_FILES["avatar"]["size"] > 500000) {
-            $error['avatar'] = 1;
+            $errors['avatar'] = 1;
 
         }
-        if (isset($error['avatar'])) {
-            echo "Sorry, your file was not uploaded.";
-            // if everything is ok, try to upload file
-        } else {
-            if (move_uploaded_file($file["avatar"]["tmp_name"], $target_file)) {
-                echo "The file " . htmlspecialchars(basename($file["avatar"]["name"])) . " has been uploaded.";
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
-        }
-
 
         if (strlen($user) <= 3 || strlen($user) > 20 || !ctype_alnum($user)) {
             $errors['username'] = 1;
@@ -71,13 +62,15 @@ class Users
             $errors['date_created'] = 1;
         }
         if ($errors == []) {
+            //upload file
+            move_uploaded_file($file["avatar"]["tmp_name"], $target_file);
             $sql = "INSERT INTO users (username, password, fullname, email, phone, date_created, avartar) VALUES ('" . $user . "', '" . $password . "', '" . $fullname . "','" . $email . "','" . $phone . "','" . $date_created . "','" . $avartar . "')";
             if ($this->conn->query($sql) === TRUE) {
                 return ['success' => 1];
             } else {
                 return ['error' => 'connect_err'];
             }
-        }else{
+        } else {
             return ['error' => $errors];
         }
 
@@ -88,9 +81,11 @@ class Users
 
     }
 
-    function del_user()
+    function del_user($get_id)
     {
-
+        $id = $get_id['id'];
+        $sql_del = "DELETE FROM users WHERE id=" . $id;
+        return $this->conn->query($sql_del);
     }
 
     function list_user()
