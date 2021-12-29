@@ -1,4 +1,7 @@
+
+<?php include "categorie.php";?>
 <!DOCTYPE html>
+<?php $path="http://localhost/tuan_viet_php/shopnew/admin/";?>
 
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
@@ -1252,11 +1255,9 @@ License: You must have a valid license purchased only from themeforest(the above
 										</tr>
 									</thead>
 									<?php
-										$conn = new mysqli('localhost','root','','myadmin');
-
-										$sql = "SELECT * FROM categories";
-										$results = $conn->query($sql)->fetch_all();
-										foreach ($results as $r){
+										$categorie = new categorie();
+									$result = $categorie->list_categories();
+										foreach ($result as $r){
 										?>
 										<tr>
 											<th scope="row"><?php echo $r[0];?></th>

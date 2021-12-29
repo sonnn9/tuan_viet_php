@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
+<?php $path="http://localhost/tuan_viet_php/shopnew/admin/";
+?>
+
 
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
@@ -34,8 +37,6 @@ License: You must have a valid license purchased only from themeforest(the above
 			}
 		});
 	</script>
-
-<<<<<<< HEAD
 	<!--end::Web font -->
 
 	<!--begin::Base Styles -->
@@ -45,7 +46,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<link href="../../assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
 
 	<!--RTL version:<link href="../../assets/demo/default/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
-=======
+
 		<!--begin::Base Styles -->
 		<link href="<?php echo $path;?>assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
 
@@ -57,7 +58,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--end::Base Styles -->
 		<link rel="shortcut icon" href="<?php echo $path;?>assets/demo/default/media/img/logo/favicon.ico" />
 	</head>
->>>>>>> develop
+
 
 	<!--end::Base Styles -->
 	<link rel="shortcut icon" href="../../assets/demo/default/media/img/logo/favicon.ico" />
@@ -159,7 +160,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		}
 
 		// Create connection
-		$conn = new mysqli('localhost', 'root', '', 'myadmin');
+		$result = new mysqli('localhost', 'root', '', 'myadmin');
 		// Check connection
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
@@ -168,28 +169,16 @@ License: You must have a valid license purchased only from themeforest(the above
 			$sql = "INSERT INTO posts (title,description,date_created,created_by,image )
 		 VALUES ('" . $title . "','" . $description . "','" . $date_created . "','" . $created . "','" . $avartar . "')";
 
-<<<<<<< HEAD
-			if ($conn->query($sql) === TRUE) {
+
+			if ($result->query($sql) === TRUE) {
 				echo "New record created successfully";
 			} else {
 				echo "Error: " . $sql . "<br>" . $conn->error;
 			}
-=======
-						<!-- BEGIN: Brand -->
-						<div class="m-stack__item m-brand  m-brand--skin-dark ">
-							<div class="m-stack m-stack--ver m-stack--general">
-								<div class="m-stack__item m-stack__item--middle m-brand__logo">
-									<a href="<?php echo $path;?>index.php" class="m-brand__logo-wrapper">
-										<img alt="" src="<?php echo $path;?>assets/demo/default/media/img/logo/logo_default_dark.png" />
-									</a>
-								</div>
-								<div class="m-stack__item m-stack__item--middle m-brand__tools">
->>>>>>> develop
 
 			$conn->close();
 		}
 	}
-
 	?>
 
 	<!-- begin:: Page -->
@@ -244,7 +233,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<!-- END: Brand -->
 					<div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
 
-<<<<<<< HEAD
+
 						<!-- BEGIN: Horizontal Menu -->
 						<button class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-dark " id="m_aside_header_menu_mobile_close_btn">
 							<i class="la la-close"></i>
@@ -275,7 +264,6 @@ License: You must have a valid license purchased only from themeforest(the above
 															<span class="m-menu__link-text">Generate Reports</span>
 															<span class="m-menu__link-badge">
 																<span class="m-badge m-badge--success">2</span>
-=======
 							<!-- BEGIN: Horizontal Menu -->
 							<button class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-dark " id="m_aside_header_menu_mobile_close_btn">
 								<i class="la la-close"></i>
@@ -307,7 +295,6 @@ License: You must have a valid license purchased only from themeforest(the above
 																<span class="m-menu__link-badge">
 																	<span class="m-badge m-badge--success">2</span>
 																</span>
->>>>>>> develop
 															</span>
 														</span>
 													</span>
@@ -418,41 +405,6 @@ License: You must have a valid license purchased only from themeforest(the above
 													<h3 class="m-menu__heading m-menu__toggle">
 														<span class="m-menu__link-text">Finance Reports</span>
 														<i class="m-menu__ver-arrow la la-angle-right"></i>
-<<<<<<< HEAD
-													</h3>
-													<ul class="m-menu__inner">
-														<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-															<a href="../../header/actions.html" class="m-menu__link ">
-																<i class="m-menu__link-icon flaticon-map"></i>
-																<span class="m-menu__link-text">Annual Reports</span>
-															</a>
-														</li>
-														<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-															<a href="../../header/actions.html" class="m-menu__link ">
-																<i class="m-menu__link-icon flaticon-user"></i>
-																<span class="m-menu__link-text">HR Reports</span>
-															</a>
-														</li>
-														<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-															<a href="../../header/actions.html" class="m-menu__link ">
-																<i class="m-menu__link-icon flaticon-clipboard"></i>
-																<span class="m-menu__link-text">IPO Reports</span>
-															</a>
-														</li>
-														<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-															<a href="../../header/actions.html" class="m-menu__link ">
-																<i class="m-menu__link-icon flaticon-graphic-1"></i>
-																<span class="m-menu__link-text">Finance Margins</span>
-															</a>
-														</li>
-														<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
-															<a href="../../header/actions.html" class="m-menu__link ">
-																<i class="m-menu__link-icon flaticon-graphic-2"></i>
-																<span class="m-menu__link-text">Revenue Reports</span>
-															</a>
-														</li>
-													</ul>
-=======
 													</a>
 													<div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right">
 														<span class="m-menu__arrow "></span>
@@ -489,13 +441,11 @@ License: You must have a valid license purchased only from themeforest(the above
 															</li>
 														</ul>
 													</div>
->>>>>>> develop
 												</li>
 												<li class="m-menu__item">
 													<h3 class="m-menu__heading m-menu__toggle">
 														<span class="m-menu__link-text">Project Reports</span>
 														<i class="m-menu__ver-arrow la la-angle-right"></i>
-<<<<<<< HEAD
 													</h3>
 													<ul class="m-menu__inner">
 														<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
@@ -641,7 +591,6 @@ License: You must have a valid license purchased only from themeforest(the above
 															</a>
 														</li>
 													</ul>
-=======
 													</a>
 													<div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right">
 														<span class="m-menu__arrow "></span>
@@ -679,7 +628,6 @@ License: You must have a valid license purchased only from themeforest(the above
 														<i class="m-menu__link-icon flaticon-users"></i>
 														<span class="m-menu__link-text">Register Member</span>
 													</a>
->>>>>>> develop
 												</li>
 											</ul>
 										</div>
@@ -832,7 +780,6 @@ License: You must have a valid license purchased only from themeforest(the above
 												<i class="flaticon-search-1"></i>
 											</span>
 										</a>
-<<<<<<< HEAD
 										<div class="m-dropdown__wrapper">
 											<span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
 											<div class="m-dropdown__inner ">
@@ -854,7 +801,6 @@ License: You must have a valid license purchased only from themeforest(the above
 														</div>
 													</div>
 												</div>
-=======
 										<div class="m-menu__submenu  m-menu__submenu--fixed m-menu__submenu--left" style="width:1000px">
 											<span class="m-menu__arrow m-menu__arrow--adjust"></span>
 											<div class="m-menu__subnav">
@@ -1048,7 +994,6 @@ License: You must have a valid license purchased only from themeforest(the above
 														</ul>
 													</li>
 												</ul>
->>>>>>> develop
 											</div>
 										</div>
 									</li>
@@ -1059,7 +1004,6 @@ License: You must have a valid license purchased only from themeforest(the above
 												<i class="flaticon-music-2"></i>
 											</span>
 										</a>
-<<<<<<< HEAD
 										<div class="m-dropdown__wrapper">
 											<span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
 											<div class="m-dropdown__inner">
@@ -1080,7 +1024,6 @@ License: You must have a valid license purchased only from themeforest(the above
 															</li>
 															<li class="nav-item m-tabs__item">
 																<a class="nav-link m-tabs__link" data-toggle="tab" href="#topbar_notifications_logs" role="tab">Logs</a>
-=======
 										<div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
 											<span class="m-menu__arrow m-menu__arrow--adjust"></span>
 											<ul class="m-menu__subnav">
@@ -1237,7 +1180,6 @@ License: You must have a valid license purchased only from themeforest(the above
 															</div>
 														</div>
 													</div>
-<<<<<<< HEAD
 												</div>
 											</div>
 										</div>
@@ -1326,7 +1268,6 @@ License: You must have a valid license purchased only from themeforest(the above
 																			<span class="m-nav__link-text">My Profile</span>
 																			<span class="m-nav__link-badge">
 																				<span class="m-badge m-badge--success">2</span>
-=======
 												</li>
 												<li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true">
 													<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
@@ -1365,13 +1306,11 @@ License: You must have a valid license purchased only from themeforest(the above
 																			<span class="m-menu__link-text">File Upload</span>
 																			<span class="m-menu__link-badge">
 																				<span class="m-badge m-badge--danger">3</span>
->>>>>>> develop
 																			</span>
 																		</span>
 																	</span>
 																</a>
 															</li>
-<<<<<<< HEAD
 															<li class="m-nav__item">
 																<a href="../../header/profile.html" class="m-nav__link">
 																	<i class="m-nav__link-icon flaticon-share"></i>
@@ -1407,7 +1346,6 @@ License: You must have a valid license purchased only from themeforest(the above
 																<a href="<?php echo $path;?>header/actions.html" class="m-menu__link ">
 																	<i class="m-menu__link-icon flaticon-cogwheel-2"></i>
 																	<span class="m-menu__link-text">System Settings</span>
->>>>>>> develop
 																</a>
 															</li>
 															<li class="m-nav__item">
@@ -1427,13 +1365,11 @@ License: You must have a valid license purchased only from themeforest(the above
 											</div>
 										</div>
 									</li>
-<<<<<<< HEAD
 									<li id="m_quick_sidebar_toggle" class="m-nav__item">
 										<a href="#" class="m-nav__link m-dropdown__toggle">
 											<span class="m-nav__link-icon">
 												<i class="flaticon-grid-menu"></i>
 											</span>
-=======
 								</ul>
 							</div>
 
@@ -2119,7 +2055,6 @@ License: You must have a valid license purchased only from themeforest(the above
 									<li class="m-nav__item">
 										<a href="" class="m-nav__link">
 											<span class="m-nav__link-text">Base Inputs</span>
->>>>>>> develop
 										</a>
 									</li>
 								</ul>
@@ -2245,53 +2180,11 @@ License: You must have a valid license purchased only from themeforest(the above
 								<!--end::Form-->
 							</div>
 
-<<<<<<< HEAD
+
 							<!--end::Portlet-->
-=======
 			<!-- end:: Body -->
 
 			<!-- begin::Footer -->
-			<footer class="m-grid__item		m-footer ">
-				<div class="m-container m-container--fluid m-container--full-height m-page__container">
-					<div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
-						<div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
-							<span class="m-footer__copyright">
-								2017 &copy; Metronic theme by
-								<a href="https://keenthemes.com" class="m-link">Keenthemes</a>
-							</span>
-						</div>
-						<div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
-							<ul class="m-footer__nav m-nav m-nav--inline m--pull-right">
-								<li class="m-nav__item">
-									<a href="#" class="m-nav__link">
-										<span class="m-nav__link-text">About</span>
-									</a>
-								</li>
-								<li class="m-nav__item">
-									<a href="#" class="m-nav__link">
-										<span class="m-nav__link-text">Privacy</span>
-									</a>
-								</li>
-								<li class="m-nav__item">
-									<a href="#" class="m-nav__link">
-										<span class="m-nav__link-text">T&C</span>
-									</a>
-								</li>
-								<li class="m-nav__item">
-									<a href="#" class="m-nav__link">
-										<span class="m-nav__link-text">Purchase</span>
-									</a>
-								</li>
-								<li class="m-nav__item m-nav__item">
-									<a href="#" class="m-nav__link" data-toggle="m-tooltip" title="Support Center" data-placement="left">
-										<i class="m-nav__link-icon flaticon-info m--icon-font-size-lg3"></i>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</footer>
 
 			<!-- end::Footer -->
 		</div>
@@ -2299,477 +2192,10 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- end:: Page -->
 
 		<!-- begin::Quick Sidebar -->
-		<div id="m_quick_sidebar" class="m-quick-sidebar m-quick-sidebar--tabbed m-quick-sidebar--skin-light">
-			<div class="m-quick-sidebar__content m--hide">
-				<span id="m_quick_sidebar_close" class="m-quick-sidebar__close">
-					<i class="la la-close"></i>
-				</span>
-				<ul id="m_quick_sidebar_tabs" class="nav nav-tabs m-tabs m-tabs-line m-tabs-line--brand" role="tablist">
-					<li class="nav-item m-tabs__item">
-						<a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_quick_sidebar_tabs_messenger" role="tab">Messages</a>
-					</li>
-					<li class="nav-item m-tabs__item">
-						<a class="nav-link m-tabs__link" data-toggle="tab" href="#m_quick_sidebar_tabs_settings" role="tab">Settings</a>
-					</li>
-					<li class="nav-item m-tabs__item">
-						<a class="nav-link m-tabs__link" data-toggle="tab" href="#m_quick_sidebar_tabs_logs" role="tab">Logs</a>
-					</li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane active" id="m_quick_sidebar_tabs_messenger" role="tabpanel">
-						<div class="m-messenger m-messenger--message-arrow m-messenger--skin-light">
-							<div class="m-messenger__messages m-scrollable">
-								<div class="m-messenger__wrapper">
-									<div class="m-messenger__message m-messenger__message--in">
-										<div class="m-messenger__message-pic">
-											<img src="<?php echo $path;?>assets/app/media/img//users/user3.jpg" alt="" />
-										</div>
-										<div class="m-messenger__message-body">
-											<div class="m-messenger__message-arrow"></div>
-											<div class="m-messenger__message-content">
-												<div class="m-messenger__message-username">
-													Megan wrote
-												</div>
-												<div class="m-messenger__message-text">
-													Hi Bob. What time will be the meeting ?
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="m-messenger__wrapper">
-									<div class="m-messenger__message m-messenger__message--out">
-										<div class="m-messenger__message-body">
-											<div class="m-messenger__message-arrow"></div>
-											<div class="m-messenger__message-content">
-												<div class="m-messenger__message-text">
-													Hi Megan. It's at 2.30PM
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="m-messenger__wrapper">
-									<div class="m-messenger__message m-messenger__message--in">
-										<div class="m-messenger__message-pic">
-											<img src="<?php echo $path;?>assets/app/media/img//users/user3.jpg" alt="" />
-										</div>
-										<div class="m-messenger__message-body">
-											<div class="m-messenger__message-arrow"></div>
-											<div class="m-messenger__message-content">
-												<div class="m-messenger__message-username">
-													Megan wrote
-												</div>
-												<div class="m-messenger__message-text">
-													Will the development team be joining ?
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="m-messenger__wrapper">
-									<div class="m-messenger__message m-messenger__message--out">
-										<div class="m-messenger__message-body">
-											<div class="m-messenger__message-arrow"></div>
-											<div class="m-messenger__message-content">
-												<div class="m-messenger__message-text">
-													Yes sure. I invited them as well
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="m-messenger__datetime">2:30PM</div>
-								<div class="m-messenger__wrapper">
-									<div class="m-messenger__message m-messenger__message--in">
-										<div class="m-messenger__message-pic">
-											<img src="<?php echo $path;?>assets/app/media/img//users/user3.jpg" alt="" />
-										</div>
-										<div class="m-messenger__message-body">
-											<div class="m-messenger__message-arrow"></div>
-											<div class="m-messenger__message-content">
-												<div class="m-messenger__message-username">
-													Megan wrote
-												</div>
-												<div class="m-messenger__message-text">
-													Noted. For the Coca-Cola Mobile App project as well ?
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="m-messenger__wrapper">
-									<div class="m-messenger__message m-messenger__message--out">
-										<div class="m-messenger__message-body">
-											<div class="m-messenger__message-arrow"></div>
-											<div class="m-messenger__message-content">
-												<div class="m-messenger__message-text">
-													Yes, sure.
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="m-messenger__wrapper">
-									<div class="m-messenger__message m-messenger__message--out">
-										<div class="m-messenger__message-body">
-											<div class="m-messenger__message-arrow"></div>
-											<div class="m-messenger__message-content">
-												<div class="m-messenger__message-text">
-													Please also prepare the quotation for the Loop CRM project as well.
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="m-messenger__datetime">3:15PM</div>
-								<div class="m-messenger__wrapper">
-									<div class="m-messenger__message m-messenger__message--in">
-										<div class="m-messenger__message-no-pic m--bg-fill-danger">
-											<span>M</span>
-										</div>
-										<div class="m-messenger__message-body">
-											<div class="m-messenger__message-arrow"></div>
-											<div class="m-messenger__message-content">
-												<div class="m-messenger__message-username">
-													Megan wrote
-												</div>
-												<div class="m-messenger__message-text">
-													Noted. I will prepare it.
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="m-messenger__wrapper">
-									<div class="m-messenger__message m-messenger__message--out">
-										<div class="m-messenger__message-body">
-											<div class="m-messenger__message-arrow"></div>
-											<div class="m-messenger__message-content">
-												<div class="m-messenger__message-text">
-													Thanks Megan. I will see you later.
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="m-messenger__wrapper">
-									<div class="m-messenger__message m-messenger__message--in">
-										<div class="m-messenger__message-pic">
-											<img src="<?php echo $path;?>assets/app/media/img//users/user3.jpg" alt="" />
-										</div>
-										<div class="m-messenger__message-body">
-											<div class="m-messenger__message-arrow"></div>
-											<div class="m-messenger__message-content">
-												<div class="m-messenger__message-username">
-													Megan wrote
-												</div>
-												<div class="m-messenger__message-text">
-													Sure. See you in the meeting soon.
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="m-messenger__seperator"></div>
-							<div class="m-messenger__form">
-								<div class="m-messenger__form-controls">
-									<input type="text" name="" placeholder="Type here..." class="m-messenger__form-input">
-								</div>
-								<div class="m-messenger__form-tools">
-									<a href="" class="m-messenger__form-attachment">
-										<i class="la la-paperclip"></i>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane" id="m_quick_sidebar_tabs_settings" role="tabpanel">
-						<div class="m-list-settings m-scrollable">
-							<div class="m-list-settings__group">
-								<div class="m-list-settings__heading">General Settings</div>
-								<div class="m-list-settings__item">
-									<span class="m-list-settings__item-label">Email Notifications</span>
-									<span class="m-list-settings__item-control">
-										<span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-											<label>
-												<input type="checkbox" checked="checked" name="">
-												<span></span>
-											</label>
-										</span>
-									</span>
-								</div>
-								<div class="m-list-settings__item">
-									<span class="m-list-settings__item-label">Site Tracking</span>
-									<span class="m-list-settings__item-control">
-										<span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-											<label>
-												<input type="checkbox" name="">
-												<span></span>
-											</label>
-										</span>
-									</span>
-								</div>
-								<div class="m-list-settings__item">
-									<span class="m-list-settings__item-label">SMS Alerts</span>
-									<span class="m-list-settings__item-control">
-										<span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-											<label>
-												<input type="checkbox" name="">
-												<span></span>
-											</label>
-										</span>
-									</span>
-								</div>
-								<div class="m-list-settings__item">
-									<span class="m-list-settings__item-label">Backup Storage</span>
-									<span class="m-list-settings__item-control">
-										<span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-											<label>
-												<input type="checkbox" name="">
-												<span></span>
-											</label>
-										</span>
-									</span>
-								</div>
-								<div class="m-list-settings__item">
-									<span class="m-list-settings__item-label">Audit Logs</span>
-									<span class="m-list-settings__item-control">
-										<span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-											<label>
-												<input type="checkbox" checked="checked" name="">
-												<span></span>
-											</label>
-										</span>
-									</span>
-								</div>
-							</div>
-							<div class="m-list-settings__group">
-								<div class="m-list-settings__heading">System Settings</div>
-								<div class="m-list-settings__item">
-									<span class="m-list-settings__item-label">System Logs</span>
-									<span class="m-list-settings__item-control">
-										<span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-											<label>
-												<input type="checkbox" name="">
-												<span></span>
-											</label>
-										</span>
-									</span>
-								</div>
-								<div class="m-list-settings__item">
-									<span class="m-list-settings__item-label">Error Reporting</span>
-									<span class="m-list-settings__item-control">
-										<span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-											<label>
-												<input type="checkbox" name="">
-												<span></span>
-											</label>
-										</span>
-									</span>
-								</div>
-								<div class="m-list-settings__item">
-									<span class="m-list-settings__item-label">Applications Logs</span>
-									<span class="m-list-settings__item-control">
-										<span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-											<label>
-												<input type="checkbox" name="">
-												<span></span>
-											</label>
-										</span>
-									</span>
-								</div>
-								<div class="m-list-settings__item">
-									<span class="m-list-settings__item-label">Backup Servers</span>
-									<span class="m-list-settings__item-control">
-										<span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-											<label>
-												<input type="checkbox" checked="checked" name="">
-												<span></span>
-											</label>
-										</span>
-									</span>
-								</div>
-								<div class="m-list-settings__item">
-									<span class="m-list-settings__item-label">Audit Logs</span>
-									<span class="m-list-settings__item-control">
-										<span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
-											<label>
-												<input type="checkbox" name="">
-												<span></span>
-											</label>
-										</span>
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane" id="m_quick_sidebar_tabs_logs" role="tabpanel">
-						<div class="m-list-timeline m-scrollable">
-							<div class="m-list-timeline__group">
-								<div class="m-list-timeline__heading">
-									System Logs
-								</div>
-								<div class="m-list-timeline__items">
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-										<a href="" class="m-list-timeline__text">12 new users registered
-											<span class="m-badge m-badge--warning m-badge--wide">important</span>
-										</a>
-										<span class="m-list-timeline__time">Just now</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-										<a href="" class="m-list-timeline__text">System shutdown</a>
-										<span class="m-list-timeline__time">11 mins</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-danger"></span>
-										<a href="" class="m-list-timeline__text">New invoice received</a>
-										<span class="m-list-timeline__time">20 mins</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-warning"></span>
-										<a href="" class="m-list-timeline__text">Database overloaded 89%
-											<span class="m-badge m-badge--success m-badge--wide">resolved</span>
-										</a>
-										<span class="m-list-timeline__time">1 hr</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-										<a href="" class="m-list-timeline__text">System error</a>
-										<span class="m-list-timeline__time">2 hrs</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-										<a href="" class="m-list-timeline__text">Production server down
-											<span class="m-badge m-badge--danger m-badge--wide">pending</span>
-										</a>
-										<span class="m-list-timeline__time">3 hrs</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-										<a href="" class="m-list-timeline__text">Production server up</a>
-										<span class="m-list-timeline__time">5 hrs</span>
-									</div>
-								</div>
-							</div>
-							<div class="m-list-timeline__group">
-								<div class="m-list-timeline__heading">
-									Applications Logs
-								</div>
-								<div class="m-list-timeline__items">
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-										<a href="" class="m-list-timeline__text">New order received
-											<span class="m-badge m-badge--info m-badge--wide">urgent</span>
-										</a>
-										<span class="m-list-timeline__time">7 hrs</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-										<a href="" class="m-list-timeline__text">12 new users registered</a>
-										<span class="m-list-timeline__time">Just now</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-										<a href="" class="m-list-timeline__text">System shutdown</a>
-										<span class="m-list-timeline__time">11 mins</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-danger"></span>
-										<a href="" class="m-list-timeline__text">New invoices received</a>
-										<span class="m-list-timeline__time">20 mins</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-warning"></span>
-										<a href="" class="m-list-timeline__text">Database overloaded 89%</a>
-										<span class="m-list-timeline__time">1 hr</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-										<a href="" class="m-list-timeline__text">System error
-											<span class="m-badge m-badge--info m-badge--wide">pending</span>
-										</a>
-										<span class="m-list-timeline__time">2 hrs</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-										<a href="" class="m-list-timeline__text">Production server down</a>
-										<span class="m-list-timeline__time">3 hrs</span>
-									</div>
-								</div>
-							</div>
-							<div class="m-list-timeline__group">
-								<div class="m-list-timeline__heading">
-									Server Logs
-								</div>
-								<div class="m-list-timeline__items">
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-										<a href="" class="m-list-timeline__text">Production server up</a>
-										<span class="m-list-timeline__time">5 hrs</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-										<a href="" class="m-list-timeline__text">New order received</a>
-										<span class="m-list-timeline__time">7 hrs</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-										<a href="" class="m-list-timeline__text">12 new users registered</a>
-										<span class="m-list-timeline__time">Just now</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-										<a href="" class="m-list-timeline__text">System shutdown</a>
-										<span class="m-list-timeline__time">11 mins</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-danger"></span>
-										<a href="" class="m-list-timeline__text">New invoice received</a>
-										<span class="m-list-timeline__time">20 mins</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-warning"></span>
-										<a href="" class="m-list-timeline__text">Database overloaded 89%</a>
-										<span class="m-list-timeline__time">1 hr</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-										<a href="" class="m-list-timeline__text">System error</a>
-										<span class="m-list-timeline__time">2 hrs</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-										<a href="" class="m-list-timeline__text">Production server down</a>
-										<span class="m-list-timeline__time">3 hrs</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-										<a href="" class="m-list-timeline__text">Production server up</a>
-										<span class="m-list-timeline__time">5 hrs</span>
-									</div>
-									<div class="m-list-timeline__item">
-										<span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-										<a href="" class="m-list-timeline__text">New order received</a>
-										<span class="m-list-timeline__time">1117 hrs</span>
-									</div>
-								</div>
-							</div>
->>>>>>> develop
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<!-- end:: Body -->
 
 	<!-- begin::Footer -->
-	<?php require_once("../layout_posts/Footer.php"); ?>
 
 
 	<!-- end::Footer -->
@@ -2777,13 +2203,12 @@ License: You must have a valid license purchased only from themeforest(the above
 
 	<!-- end:: Page -->
 
-<<<<<<< HEAD
+
 	<!-- begin::Quick Sidebar -->
-=======
+
 		<!--begin::Base Scripts -->
 		<script src="<?php echo $path;?>assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
 		<script src="<?php echo $path;?>assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
->>>>>>> develop
 
 	<?php require_once("../layout_posts/Quick Sidebar.php"); ?>
 

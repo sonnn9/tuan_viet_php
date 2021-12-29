@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <?php $path = "http://localhost/tuan_viet_php/shopnew/admin/"; ?>
 
