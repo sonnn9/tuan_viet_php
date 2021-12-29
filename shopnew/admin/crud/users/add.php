@@ -50,6 +50,8 @@ $path = "http://".$_SERVER['SERVER_NAME']."/tuan_viet_php/shopnew/admin/";
 
 <!--PHP validate -->
 <?php
+include 'layouts/user.php';
+$add = new Users();
 $user = '';
 $password = '';
 $fullname = '';
@@ -57,10 +59,7 @@ $email = '';
 $phone = '';
 $date_created = '';
 if (isset($_POST['btn_addUser'])) {
-    include 'layouts/user.php';
-    $add = new Users();
     $insert = $add->add_user($_POST, $_FILES);
-
 }
 ?>
 
@@ -109,10 +108,10 @@ if (isset($_POST['btn_addUser'])) {
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group">
                                         <label>Username</label>
-                                        <input type="text" name="username" value="<?php echo $insert->user; ?>"
+                                        <input type="text" name="username" value="<?php echo $user; ?>"
                                                class="form-control m-input">
                                     </div>
-                                    <?php if (isset($insert->errors['username'])) : ?>
+                                    <?php if (isset($insert['error']['username'])) : ?>
                                         <div class="alert alert-primary" role="alert">
                                             Username required!
                                         </div>
@@ -121,18 +120,18 @@ if (isset($_POST['btn_addUser'])) {
                                     <div class="form-group m-form__group">
                                         <label>Avartar</label>
                                         <input type="file" name="avatar" class="form-control m-input">
-                                    </div>
-                                    <div class="form-group m-form__group">
-                                        <label>Password</label>
-                                        <input type="password" name="password" value="<?php echo $password; ?>"
-                                               class="form-control m-input">
-                                        <?php if (isset($errors['avatar'])) : ?>
+                                        <?php if (isset($insert['error']['avatar'])) : ?>
                                             <div class="alert alert-primary" role="alert">
                                                 Avartar required!
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                    <?php if (isset($errors['password'])) : ?>
+                                    <div class="form-group m-form__group">
+                                        <label>Password</label>
+                                        <input type="password" name="password" value="<?php echo $password; ?>"
+                                               class="form-control m-input">
+                                    </div>
+                                    <?php if (isset($insert['error']['password'])) : ?>
                                         <div class="alert alert-primary" role="alert">
                                             Password required!
                                         </div>
@@ -142,7 +141,7 @@ if (isset($_POST['btn_addUser'])) {
                                         <input type="text" name="fullname" value="<?php echo $fullname; ?>"
                                                class="form-control m-input">
                                     </div>
-                                    <?php if (isset($errors['fullname'])) : ?>
+                                    <?php if (isset($insert['error']['fullname'])) : ?>
                                         <div class="alert alert-primary" role="alert">
                                             Fullname required!
                                         </div>
@@ -152,7 +151,7 @@ if (isset($_POST['btn_addUser'])) {
                                         <input type="email" name="email" value="<?php echo $email; ?>"
                                                class="form-control m-input">
                                     </div>
-                                    <?php if (isset($errors['email'])) : ?>
+                                    <?php if (isset($insert['error']['email'])) : ?>
                                         <div class="alert alert-primary" role="alert">
                                             Email required!
                                         </div>
@@ -162,7 +161,7 @@ if (isset($_POST['btn_addUser'])) {
                                         <input type="text" name="phone" value="<?php echo $phone; ?>"
                                                class="form-control m-input">
                                     </div>
-                                    <?php if (isset($errors['phone'])) : ?>
+                                    <?php if (isset($insert['error']['phone'])) : ?>
                                         <div class="alert alert-primary" role="alert">
                                             Phone required!
                                         </div>
@@ -172,7 +171,7 @@ if (isset($_POST['btn_addUser'])) {
                                         <input type="text" name="date_created" value="<?php echo $date_created; ?>"
                                                class="form-control m-input">
                                     </div>
-                                    <?php if (isset($errors['date_created'])) : ?>
+                                    <?php if (isset($insert['error']['date_created'])) : ?>
                                         <div class="alert alert-primary" role="alert">
                                             Date required!
                                         </div>
