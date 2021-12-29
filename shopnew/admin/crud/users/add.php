@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<?php $path = "http://localhost/tuan_viet_php/shopnew/admin/";
+<?php
+$path = "http://".$_SERVER['SERVER_NAME']."/tuan_viet_php/shopnew/admin/";
 
 ?>
 
@@ -58,6 +59,7 @@ $date_created = '';
 if (isset($_POST['btn_addUser'])) {
     include 'layouts/user.php';
     $add = new Users();
+    $insert = $add->add_user($_POST, $_FILES);
 
 }
 ?>
@@ -107,10 +109,10 @@ if (isset($_POST['btn_addUser'])) {
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group">
                                         <label>Username</label>
-                                        <input type="text" name="username" value="<?php echo $user; ?>"
+                                        <input type="text" name="username" value="<?php echo $insert->user; ?>"
                                                class="form-control m-input">
                                     </div>
-                                    <?php if (isset($errors['username'])) : ?>
+                                    <?php if (isset($insert->errors['username'])) : ?>
                                         <div class="alert alert-primary" role="alert">
                                             Username required!
                                         </div>

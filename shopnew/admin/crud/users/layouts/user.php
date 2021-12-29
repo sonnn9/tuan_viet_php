@@ -14,38 +14,36 @@ class Users
 
     function add_user($post, $file)
     {
-        $user = $_POST['username'];
-        $password = $_POST['password'];
-        $fullname = $_POST['fullname'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $date_created = $_POST['date_created'];
+        $user = $post['username'];
+        $password = $post['password'];
+        $fullname = $post['fullname'];
+        $email = $post['email'];
+        $phone = $post['phone'];
+        $date_created = $post['date_created'];
         $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/tuan_viet_php/upload/avatar/";
-        $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
-        $avartar = "/upload/avatar/" . $_FILES["avatar"]["name"];
+        $target_file = $target_dir . basename($file["avatar"]["name"]);
+        $avartar = "/upload/avatar/" . $file["avatar"]["name"];
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         // Check if image file is a actual image or fake image
-        $check = getimagesize($_FILES["avatar"]["tmp_name"]);
+        $check = getimagesize($file["avatar"]["tmp_name"]);
         if ($check == false) {
-            echo "File is not an image.";
-            $uploadOk = 0;
+            $error['avatar'] = 1;
         }
         if (file_exists($target_file)) {
-            echo "Sorry, file already exists.";
-            $uploadOk = 0;
+            $error['avatar'] = 1;
+
         }
         if ($_FILES["avatar"]["size"] > 500000) {
-            echo "Sorry, your file is too large.";
-            $uploadOk = 0;
-        }
-        if ($uploadOk == 0) {
             $error['avatar'] = 1;
+
+        }
+        if (isset($error['avatar'])) {
             echo "Sorry, your file was not uploaded.";
             // if everything is ok, try to upload file
         } else {
-            if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file)) {
-                echo "The file " . htmlspecialchars(basename($_FILES["avatar"]["name"])) . " has been uploaded.";
+            if (move_uploaded_file($file["avatar"]["tmp_name"], $target_file)) {
+                echo "The file " . htmlspecialchars(basename($file["avatar"]["name"])) . " has been uploaded.";
             } else {
                 echo "Sorry, there was an error uploading your file.";
             }
@@ -74,11 +72,13 @@ class Users
         }
         if ($errors == []) {
             $sql = "INSERT INTO users (username, password, fullname, email, phone, date_created, avartar) VALUES ('" . $user . "', '" . $password . "', '" . $fullname . "','" . $email . "','" . $phone . "','" . $date_created . "','" . $avartar . "')";
-            if ($db->query($sql) === TRUE) {
-                echo "A new user has been created!";
+            if ($this->conn->query($sql) === TRUE) {
+                return ['success' => 1];
             } else {
-                echo "Error: " . $sql;
+                return ['error' => 'connect_err'];
             }
+        }else{
+            return ['error' => $errors];
         }
 
     }
