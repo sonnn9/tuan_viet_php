@@ -1,4 +1,8 @@
+
+<?php include "post.php";?>
 <!DOCTYPE html>
+<?php $path="http://localhost/tuan_viet_php/shopnew/admin/";?>
+
 
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
@@ -45,7 +49,18 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--RTL version:<link href="<?php echo $path;?>assets/demo/default/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
 
 		<!--end::Base Styles -->
+
+		<link rel="shortcut icon" href="../../assets/demo/default/media/img/logo/favicon.ico" />
+		<style>
+			body{
+				margin-right: 20px;
+				padding-right: ;
+			}
+		</style>
+		<body>
+
 		<link rel="shortcut icon" href="<?php echo $path;?>assets/demo/default/media/img/logo/favicon.ico" />
+
 	</head>
 
 	<!-- end::Head -->
@@ -1253,19 +1268,22 @@ License: You must have a valid license purchased only from themeforest(the above
 											<th>Actions</th>
 										</tr>
 									</thead>
+									
 									<?php
-									$conn = new mysqli('localhost','root','','myadmin');
-										$sql = "SELECT * FROM posts";
-										$results = $conn->query($sql)->fetch_all();
-										foreach ($results as $r){
+									$host = 'http://localhost/tuan_viet_php';
+									$post = new post();
+									$result = $post->list_posts();
+										foreach ($result as $r) {
 											?>
+										
 										<tr>
-											<th scope="row"><?php echo $r[0];?></td>
+									
+											<th><?php echo $r[0];?></td>
 											<th><?php echo $r[1];?></th>
 											<th><?php echo $r[2];?></th>
 											<th><?php echo $r[3];?></th>
 											<th><?php echo $r[4];?></th>
-											<th><?php echo $r[5];?></th>
+											<td><img style ="width: 100px" src="<?php echo $host.$r[5];?> "></td>
 											<td>
 											<span class="dropdown">
 											<a href="#" class="btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown" aria-expanded="false">

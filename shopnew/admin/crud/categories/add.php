@@ -61,38 +61,7 @@ $date_created = '';
 
 
 if (isset($_POST['btn_frmRegister'])) {
-    // username
-    $username = $_POST['username'];
-    $date_created = $_POST['date_created'];
 
-    if (strlen($username) <= 3) {
-        $errors['username'] = 1;
-    }
-
-    // date created
-if (strlen($date_created) < 6) {
-        $errors['date_created'] =  1;
-    }
-             // Create connection
-             $conn = new mysqli('localhost', 'root','','myadmin');
-             // Check connection
-             if ($conn->connect_error) {
-                 die("Connection failed: " . $conn->connect_error);
-             }
-             if ($errors == []) {
-                 $sql = "INSERT INTO categories (category_name,date_created )
-            VALUES ('" . $username . "','" . $date_created . "')";
-
-                 if ($conn->query($sql) === TRUE) {
-                     echo "New record created successfully";
-                 } else {
-                     echo "Error: " . $sql . "<br>" . $conn->error;
-                 }
-
-                 $conn->close();
-
-             }
-    } 
 
 ?>
 		<!-- begin:: Page -->

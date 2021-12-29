@@ -53,59 +53,63 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- begin::Body -->
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 	<?php
-$connect = new mysqli('localhost', 'root', '', 'myadmin');
+$conn = new mysqli('localhost', 'root', '', 'myadmin');
+if($conn->connect_error){
+	echo "Connetion failed: ".$conn->connect_error;
+}
 $id = $_GET['id'];
-// tu validate
-$sql = "SELECT * FROM categories where category_id = " .$id ;
-$detail = $connect->query($sql);
+$sql_created = "SELECT id , fullname FROM users";
+	$opt_created = $conn->query($sql_created);
+	$created = '';
+	$fullname = 'Select created';
+
+$sql = "SELECT * FROM posts where post_id = " .$id ;
+$detail = $conn->query($sql);
 $detail = $detail->fetch_object();
 $title = $detail->title;
+$description = $detail->description;
 $date_created = $detail->date_created;
-$created_by = $detail->created_by;
+$created = $detail->created_by;
 $image = $detail->image;
 $errors =[];
 
-if (isset($_POST['btn btn-primary'])) {
-    // username
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $date_created = $_POST['date_created'];
-    $created_by = $_POST['created_by'];
-    $image = $_POST['image'];
+if (strlen($title) <= 3) {
+	$errors['title'] = 1;
+}
+
+// description
+if (strlen($description) < 20) {
+	$errors['description'] = 1;
+}
+
+// date created
+if (strlen( $date_created ) < 6) {
+	$errors['date_created'] =  1;
+}
+
+if ($created =='') {
+	$errors['created'] =  1;
+
+}
+if (strlen($image) < 6 ) {
+	$errors['image'] = 1;
 }
 
     if (isset($_POST['update'])) {
-        $username = $_POST['username'];
+        $title = $_POST['title'];
+		$description = $_POST['description'];
         $date_created = $_POST['date_created'];
-        $sql_update = "update categories set title = '".$title."', description='".$description."'date_created='".$date_created."'created_by='".$created_by."'image='".$image."' where category_id = " .$id ;
-        $result_update = $connect->query($sql_update);
+		$created = $_POST['created'];
+		$image = $_POST['image'];
+        $sql_update = "update posts set title = '".$title."',description='".$description."',date_created='".$date_created."',created_by='".$created."',image='".$image."' where post_id = " .$id ;
+
+		$result_update = $conn->query($sql_update);
         if ($result_update == true) {
             echo "update thanhf cong";
         }else{
             echo "update loi";
         }
-    if (strlen($title) <= 3) {
-        $errors['title'] = 1;
-    }
-
-    // description
-    if (strlen($description) < 20) {
-        $errors['description'] = 1;
-    }
-
-    // date created
-if (strlen( $date_created ) < 6) {
-        $errors['date_created'] =  1;
-    }
-
-    if (strlen($created_by) < 7) {
-        $errors['created_by'] =  1;
-
-    }
-    if (strlen($image) < 6 ) {
-        $errors['image'] = 1;
-    }
-
+  
 }
 
 ?>
@@ -1416,10 +1420,17 @@ if (strlen( $date_created ) < 6) {
 											<?php endif; ?>
 											</div>
 											<div class="form-group m-form__group">
-												<select class="form-control m-input" id="exampleSelect1" value="<?php echo $created_by;?>" name="created_by">
-												<option>Created by</option>
+											<select class="form-control m-input" name="created" id="exampleSelect1">
+													<option value="<?php echo $created;?>"><?php echo $fullname;?></option>
+													<?php
+													while ($row = $opt_created->fetch_array()) {
+														?>
+														<option value="<?php echo $row['id']; ?>" <?php echo $created == $row['id']? "selected" : '';?>><?php echo $row['fullname']; ?></option>
+														<?php
+													}
+													?>
 												</select>
-													<?php if (isset($errors['created_by'])): ?>
+													<?php if (isset($errors['created'])): ?>
 													<div class="alert alert-primary mt-1" role="alert">
 													nguoi tao !
 													</div>
@@ -1438,7 +1449,7 @@ if (strlen( $date_created ) < 6) {
 										</div>
 										<div class="m-portlet__foot m-portlet__foot--fit">
 											<div class="m-form__actions">
-												<button type="submit" class="btn btn-primary" name="btn_frmRegister">Add New</button>
+												<button type="submit" class="btn btn-primary" name="update">edit</button>
 												<button type="reset" class="btn btn-secondary">Cancel</button>
 											</div>
 										</div>
