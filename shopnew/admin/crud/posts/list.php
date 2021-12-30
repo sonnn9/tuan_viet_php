@@ -1271,7 +1271,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									
 									<?php
 									$host = 'http://localhost/tuan_viet_php';
-									$post = new post();
+									$post = new posts();
 									$result = $post->list_posts();
 										foreach ($result as $r) {
 											?>

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php $path="http://localhost/tuan_viet_php/shopnew/admin/";
+?>
+
 
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
@@ -55,14 +58,13 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- begin::Body -->
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 	<?php
-$errors = [];
-$username = '';
-$date_created = '';
-
-
+	include "categorie.php";
+	$new_categori = new categories();
 if (isset($_POST['btn_frmRegister'])) {
+	
+	$insert =$new_categori->add_categorie($_POST);
 
-
+}
 ?>
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
@@ -1191,8 +1193,8 @@ if (isset($_POST['btn_frmRegister'])) {
 										<div class="m-portlet__body">
 											<div class="form-group m-form__group">
 												<label >Username</label>
-												<input type="text" class="form-control m-input"  value="<?php echo $username;?>" name="username">
-												<?php if (isset($errors['username'])): ?>
+												<input type="text" class="form-control m-input"value="<?php echo  isset($insert['data']['username']) ? $insert['data']['username'] :'' ;?>"name="username">
+												<?php if (isset($insert['error']['username'])): ?>
 												<div class="alert alert-primary mt-1" role="alert">
 													nhập tên !
 												</div>
@@ -1201,8 +1203,8 @@ if (isset($_POST['btn_frmRegister'])) {
 											</div>										
 											<div class="form-group m-form__group">
 												<label >Date created</label>
-												<input type="text" class="form-control m-input" value="<?php echo $date_created;?>" name="date_created">
-												<?php if (isset($errors['date_created'])): ?>
+												<input type="text" class="form-control m-input"value="<?php echo isset($insert['data']['date_created']) ? $insert['data']['username']:'' ;?>"name="date_created">
+												<?php if (isset($insert['error']['date_created'])): ?>
 												<div class="alert alert-primary mt-1" role="alert">
 													hsd!
 												</div>

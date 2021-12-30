@@ -71,6 +71,6 @@ class User {
     
 		$sql = "SELECT * FROM users";
 		$result = $this->conn->query($sql);
-        return $result;
+        return $result->fetch_all();
     }
 }

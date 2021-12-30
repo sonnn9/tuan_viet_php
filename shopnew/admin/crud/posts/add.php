@@ -1,6 +1,5 @@
 <!DOCTYPE html> 
-<?php $path="http://localhost/tuan_viet_php/shopnew/admin/";
-?>
+<?php $path="http://localhost/tuan_viet_php/shopnew/admin/";?>
 
 
 <!-- 
@@ -70,12 +69,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 	<?php
-	$conn = new mysqli('localhost', 'root', '', 'myadmin');
-	if ($conn->connect_error) {
-		echo "Connetion failed: " . $conn->connect_error;
-	}
-	$sql_created = "SELECT id , fullname FROM users";
-	$opt_created = $conn->query($sql_created);
+	include "post.php";
+	$new_post = new post();
 	$created = 0;
 	$fullname = 'Select created';
 	$errors = [];
@@ -83,101 +78,8 @@ License: You must have a valid license purchased only from themeforest(the above
 	$description = '';
 	$date_created = '';
 
-
 	if (isset($_POST['btn_frmRegister'])) {
-		// username
-		$title = $_POST['title'];
-		$description = $_POST['description'];
-		$date_created = $_POST['date_created'];
-		$created = $_POST['created'];
-
-		$target_dir = $_SERVER['DOCUMENT_ROOT'] . "/tuan_viet_php/upload/avatar/";
-		$target_file = $target_dir . basename($_FILES["avatar"]["name"]);
-		$avartar = "/upload/avatar/" . $_FILES["avatar"]["name"];
-		$uploadOk = 1;
-		$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-		// Check if image file is a actual image or fake image
-		$check = getimagesize($_FILES["avatar"]["tmp_name"]);
-		if ($check !== false) {
-			echo "File is an image - " . $check["mime"] . ".";
-			$uploadOk = 1;
-		} else {
-			echo "File is not an image.";
-			$uploadOk = 0;
-		}
-
-		// Check if file already exists
-		if (file_exists($target_file)) {
-			echo "Sorry, file already exists.";
-			$uploadOk = 0;
-		}
-
-		// Check file size
-		if ($_FILES["avatar"]["size"] > 500000) {
-			echo "Sorry, your file is too large.";
-			$uploadOk = 0;
-		}
-
-		// Allow certain file formats
-		if (
-			$imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-			&& $imageFileType != "gif"
-		) {
-			echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-			$uploadOk = 0;
-		}
-
-		// Check if $uploadOk is set to 0 by an error
-		var_dump($target_file);
-		if ($uploadOk == 0) {
-			echo "Sorry, your file was not uploaded.";
-			// if everything is ok, try to upload file
-		} else {
-			if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file)) {
-				echo "The file " . htmlspecialchars(basename($_FILES["avatar"]["name"])) . " has been uploaded.";
-			} else {
-				echo "Sorry, there was an error uploading your file.";
-			}
-		}
-
-
-		if (strlen($title) <= 3) {
-			$errors['title'] = 1;
-		}
-
-		// description
-		if (strlen($description) < 20) {
-			$errors['description'] = 1;
-		}
-
-		// date created
-		if (strlen($date_created) < 6) {
-			$errors['date_created'] =  1;
-		}
-
-		if ($created === 0) {
-			$errors['created'] =  1;
-		}
-
-		// Create connection
-		$result = new mysqli('localhost', 'root', '', 'myadmin');
-		// Check connection
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		}
-		if ($errors == []) {
-			$sql = "INSERT INTO posts (title,description,date_created,created_by,image )
-		 VALUES ('" . $title . "','" . $description . "','" . $date_created . "','" . $created . "','" . $avartar . "')";
-
-
-			if ($result->query($sql) === TRUE) {
-				echo "New record created successfully";
-			} else {
-				echo "Error: " . $sql . "<br>" . $conn->error;
-			}
-
-			$conn->close();
-		}
+		$insert = $new_post->add_posts($_POST, $_FILES);
 	}
 	?>
 
@@ -1072,7 +974,6 @@ License: You must have a valid license purchased only from themeforest(the above
 																	<i class="m-menu__link-icon flaticon-graphic"></i>
 																	<span class="m-menu__link-text">User Reports</span>
 																</a>
->>>>>>> develop
 															</li>
 														</ul>
 														<div class="tab-content">
@@ -2115,8 +2016,8 @@ License: You must have a valid license purchased only from themeforest(the above
 									<div class="m-portlet__body">
 										<div class="form-group m-form__group">
 											<label>Title</label>
-											<input type="text" class="form-control m-input" value="<?php echo $title; ?>" name="title">
-											<?php if (isset($errors['title'])) : ?>
+											<input type="text" class="form-control m-input" value="<?php echo isset($insert['data']['title'])? $insert['data']['title']:''; ?>" name="title">
+											<?php if (isset($insert['error']['title'])) : ?>
 												<div class="alert alert-primary mt-1" role="alert">
 													nhap lai !
 												</div>
@@ -2124,8 +2025,8 @@ License: You must have a valid license purchased only from themeforest(the above
 										</div>
 										<div class="form-group m-form__group">
 											<label for="exampleTextarea">Description</label>
-											<textarea class="form-control m-input" name="description" id="exampleTextarea" rows="3"><?php echo $description; ?></textarea>
-											<?php if (isset($errors['description'])) : ?>
+											<textarea class="form-control m-input" name="description" id="exampleTextarea" rows="3"><?php echo isset($insert['data']['description'])? $insert['data']['description']:''; ?></textarea>
+											<?php if (isset($insert['error']['description'])) : ?>
 												<div class="alert alert-primary mt-1" role="alert">
 													content !
 												</div>
@@ -2133,26 +2034,35 @@ License: You must have a valid license purchased only from themeforest(the above
 										</div>
 										<div class="form-group m-form__group">
 											<label>Date created</label>
-											<input type="text" class="form-control m-input" value="<?php echo $date_created; ?>" name="date_created">
-											<?php if (isset($errors['date_created'])) : ?>
+											<input type="text" class="form-control m-input" value="<?php echo isset($insert['data']['date_created'])? $insert['data']['date_created']:''; ?>" name="date_created">
+											<?php if (isset($insert['error']['date_created'])) : ?>
 												<div class="alert alert-primary mt-1" role="alert">
 													hay nhập lại pass !
 												</div>
 											<?php endif; ?>
 										</div>
 										<div class="form-group m-form__group">
+											<?php
+											include "../users/user.php";
+											$users = new User(); 
+											$user_data = $users->list_users();
+											?>
 											<select class="form-control m-input" name="created" id="exampleSelect1">
-												<option value="<?php echo $created; ?>"><?php echo $fullname; ?></option>
-												<?php
-												while ($row = $opt_created->fetch_array()) {
-												?>
-													<option value="<?php echo $row['id']; ?>" <?php echo $created == $row['id'] ? "selected" : ''; ?>> <?php echo $row['fullname']; ?> </option>
-												<?php
-												}
-												?>
-											</select>
 
-											<?php if (isset($errors['created'])) : ?>
+											<?php foreach($user_data as $u) {	
+	                                         ?>
+											 		<?php echo isset($insert['data']['created'])? $insert['data']['created']:'';?>
+											 <option value="<?php echo $u[0]; ?>"><?php echo $u[3]; ?></option>
+											
+											
+											<?php
+											
+										}
+											?>
+	
+											</select>
+									
+											<?php if (isset($insert['error']['created'])) : ?>
 												<div class="alert alert-primary mt-1" role="alert">
 													nguoi tao !
 												</div>
@@ -2160,8 +2070,8 @@ License: You must have a valid license purchased only from themeforest(the above
 										</div>
 										<div class="form-group m-form__group">
 											<label>Image</label>
-											<input type="file" class="form-control m-input" value="<?php echo $avartar; ?>" name="avatar">
-											<?php if (isset($errors['avatar'])) : ?>
+											<input type="file" class="form-control m-input" value="<?php echo isset($insert['data']['avatar'])? $insert['data']['avatar']:''; ?>" name="avatar">
+											<?php if (isset($insert['error']['avatar'])) : ?>
 												<div class="alert alert-primary mt-1" role="alert">
 													image !
 												</div>

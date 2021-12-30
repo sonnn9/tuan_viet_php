@@ -1255,7 +1255,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										</tr>
 									</thead>
 									<?php
-										$categorie = new categorie();
+										$categorie = new categories();
 									$result = $categorie->list_categories();
 										foreach ($result as $r){
 										?>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<?php $path="http://localhost/tuan_viet_php/shopnew/admin/";?>
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
 Author: KeenThemes
@@ -53,64 +53,19 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- begin::Body -->
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 	<?php
-$conn = new mysqli('localhost', 'root', '', 'myadmin');
-if($conn->connect_error){
-	echo "Connetion failed: ".$conn->connect_error;
-}
-$id = $_GET['id'];
-$sql_created = "SELECT id , fullname FROM users";
-	$opt_created = $conn->query($sql_created);
-	$created = '';
-	$fullname = 'Select created';
-
-$sql = "SELECT * FROM posts where post_id = " .$id ;
-$detail = $conn->query($sql);
-$detail = $detail->fetch_object();
-$title = $detail->title;
-$description = $detail->description;
-$date_created = $detail->date_created;
-$created = $detail->created_by;
-$image = $detail->image;
-$errors =[];
-
-if (strlen($title) <= 3) {
-	$errors['title'] = 1;
-}
-
-// description
-if (strlen($description) < 20) {
-	$errors['description'] = 1;
-}
-
-// date created
-if (strlen( $date_created ) < 6) {
-	$errors['date_created'] =  1;
-}
-
-if ($created =='') {
-	$errors['created'] =  1;
-
-}
-if (strlen($image) < 6 ) {
-	$errors['image'] = 1;
-}
+include "post.php";
+$get_id= $_GET['id'];
+$post = new posts();
+$detail = $post->edit_id_posts($get_id);
 
     if (isset($_POST['update'])) {
-        $title = $_POST['title'];
-		$description = $_POST['description'];
-        $date_created = $_POST['date_created'];
-		$created = $_POST['created'];
-		$image = $_POST['image'];
-        $sql_update = "update posts set title = '".$title."',description='".$description."',date_created='".$date_created."',created_by='".$created."',image='".$image."' where post_id = " .$id ;
-
-		$result_update = $conn->query($sql_update);
-        if ($result_update == true) {
-            echo "update thanhf cong";
-        }else{
-            echo "update loi";
-        }
-  
-}
+		$result = $post->edit_posts($get_id, $_POST);
+		if(isset($result['error'])){
+			echo "not edit";
+			}else{
+				header('Location:http://localhost/tuan_viet_php/shopnew/admin/crud/posts/list.php');
+			}    
+		}
 
 ?>
 
@@ -1394,8 +1349,8 @@ if (strlen($image) < 6 ) {
 										<div class="m-portlet__body">
 											<div class="form-group m-form__group">
 												<label >Title</label>
-												<input type="text" class="form-control m-input" value="<?php echo $title;?>" name="title">
-												<?php if (isset($errors['title'])): ?>
+												<input type="text" class="form-control m-input" value="<?php echo  isset($result['data']['title']) ? $result['data']['title'] : $detail['title'];?>" name="title">
+												<?php if (isset($result['error']['title'])): ?>
 													<div class="alert alert-primary mt-1" role="alert">
 														nhap lai !
 													</div>
@@ -1403,8 +1358,8 @@ if (strlen($image) < 6 ) {
 											</div>
 											<div class="form-group m-form__group">
 												<label for="exampleTextarea">Description</label>
-												<textarea class="form-control m-input" name="description" id="exampleTextarea" rows="3"><?php echo $description;?></textarea>
-												<?php if (isset($errors['description'])): ?>
+												<textarea class="form-control m-input" name="description" id="exampleTextarea" rows="3"><?php echo isset($result['data']['description']) ? $result['data']['description'] : $detail['description'];?></textarea>
+												<?php if (isset($result['error']['description'])): ?>
 												<div class="alert alert-primary mt-1" role="alert">
 													content !
 												</div>
@@ -1412,25 +1367,34 @@ if (strlen($image) < 6 ) {
 											</div>
 											<div class="form-group m-form__group">
 												<label >Date created</label>
-												<input type="text" class="form-control m-input" value="<?php echo $date_created;?>" name="date_created">
-												<?php if (isset($errors['date_created'])): ?>
+												<input type="text" class="form-control m-input" value="<?php echo isset($result['data']['date_created']) ? $result['data']['date_created'] : $detail['date_created'];?>" name="date_created">
+												<?php if (isset($result['error']['date_created'])): ?>
 												<div class="alert alert-primary mt-1" role="alert">
 													hay nhập lại pass !
 												</div>
 											<?php endif; ?>
 											</div>
 											<div class="form-group m-form__group">
+											<?php
+											include "../users/user.php";
+											$users = new User(); 
+											$user_data = $users->list_users();
+											?>
 											<select class="form-control m-input" name="created" id="exampleSelect1">
-													<option value="<?php echo $created;?>"><?php echo $fullname;?></option>
-													<?php
-													while ($row = $opt_created->fetch_array()) {
-														?>
-														<option value="<?php echo $row['id']; ?>" <?php echo $created == $row['id']? "selected" : '';?>><?php echo $row['fullname']; ?></option>
-														<?php
-													}
-													?>
-												</select>
-													<?php if (isset($errors['created'])): ?>
+
+											<?php foreach($user_data as $u) {	
+	                                         ?>
+											 		<?php echo isset($insert['data']['created'])? $insert['data']['created']:'';?>
+											 <option value="<?php echo $u[0]; ?>"><?php echo $u[3]; ?></option>
+											
+											
+											<?php
+											
+										}
+											?>
+	
+											</select>
+													<?php if (isset($result['error']['created'])): ?>
 													<div class="alert alert-primary mt-1" role="alert">
 													nguoi tao !
 													</div>
@@ -1438,8 +1402,8 @@ if (strlen($image) < 6 ) {
                                             </div>   
 											<div class="form-group m-form__group">
 												<label >Image</label>
-												<input type="text" class="form-control m-input" value="<?php echo $image;?>" name="image">
-												<?php if (isset($errors['image'])): ?>
+												<input type="text" class="form-control m-input" value="<?php echo isset($result['data']['image']) ? $result['data']['image'] : $detail['image'];?>" name="image">
+												<?php if (isset($result['error']['image'])): ?>
 											<div class="alert alert-primary mt-1" role="alert">
 												image !
 											</div>

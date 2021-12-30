@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<?php $path="http://localhost/tuan_viet_php/shopnew/admin/";
+?>
 
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
@@ -56,39 +58,18 @@ License: You must have a valid license purchased only from themeforest(the above
 	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 
 	<?php
-$connect = new mysqli('localhost', 'root', '', 'myadmin');
-$id = $_GET['id'];
-// tu validate
-$sql = "SELECT * FROM categories where category_id = " .$id ;
-$detail = $connect->query($sql);
-$detail = $detail->fetch_object();
-$username = $detail->category_name;
-$date_created = $detail->date_created;
-$errors =[];
-
-
-if (strlen($username) <= 3 ) {
-    $errors['username'] = 1;
-}
-
-if (strlen($date_created) <= 3 ) {
-    $errors['date_created'] = 1;
-}
-
-
+include "categorie.php";
+$get_id= $_GET['id'];
+$edit = new categories();
+$detail = $edit->detail_categories($get_id);
 if (isset($_POST['update'])) {
-    $username = $_POST['username'];
-    $date_created= $_POST['date_created'];
-    $sql_update = "update categories set category_name = '".$username."',date_created='".$date_created."' where category_id = " .$id ;
-    $result_update = $connect->query($sql_update);
-    if ($result_update == true) {
-        echo "update thanhf cong";
-    }else{
-        echo "update loi";
-    }
+	$result = $edit->edits_post_categories($get_id, $_POST);
+	if(isset($result['error']){
+		echo "not edit";
+		}else{
+			header('Location:http://localhost/tuan_viet_php/shopnew/admin/crud/categories/list.php');
+		}
 }
-
-
 ?>
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
@@ -1213,12 +1194,12 @@ if (isset($_POST['update'])) {
 									</div>
 
 									<!--begin::Form-->
-									<form action="edit.php?id=<?php echo $id; ?>" method="POST" class="m-form m-form--fit m-form--label-align-right">
+									<form action="edit.php?id=<?php echo $get_id; ?>" method="POST" class="m-form m-form--fit m-form--label-align-right">
 										<div class="m-portlet__body">
 											<div class="form-group m-form__group">
 												<label >Name</label>
-												<input type="text" class="form-control m-input"  value="<?php echo $username;?>" name="username">
-												<?php if (isset($errors['username'])): ?>
+												<input type="text" class="form-control m-input"  value="<?php echo isset($result['data']['username']) ? $result['data']['username'] : $detail['category_name'];?>" name="username">
+												<?php if (isset($result['error']['username'])): ?>
 												<div class="alert alert-primary mt-1" role="alert">
 													nhập tên !
 												</div>
@@ -1227,8 +1208,8 @@ if (isset($_POST['update'])) {
 											</div>										
 											<div class="form-group m-form__group">
 												<label >Date created</label>
-												<input type="text" class="form-control m-input" value="<?php echo $date_created;?>" name="date_created">
-												<?php if (isset($errors['date_created'])): ?>
+												<input type="text" class="form-control m-input" value="<?php echo isset($result['data']['date_created']) ? $result['data']['date_created'] : $detail['date_created'];?>" name="date_created">
+												<?php if (isset($result['error']['date_created'])): ?>
 												<div class="alert alert-primary mt-1" role="alert">
 													hsd!
 												</div>
