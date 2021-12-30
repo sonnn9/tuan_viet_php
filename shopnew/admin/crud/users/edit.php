@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<?php $path = "http://localhost/tuan_viet_php/shopnew/admin/";
-$host = "http://localhost/tuan_viet_php";
+<?php $path = "http://".$_SERVER['SERVER_NAME']."/tuan_viet_php/shopnew/admin/";
+$host = "http://".$_SERVER['SERVER_NAME']."/tuan_viet_php";
 ?>
 
 
@@ -50,90 +50,13 @@ $host = "http://localhost/tuan_viet_php";
 
 	<!--PHP validate -->
 	<?php
-	$conn = new mysqli('localhost', 'root', '', 'myadmin');
-	if ($conn->connect_error) {
-		echo "Connetion failed: " . $conn->connect_error;
-	}
-	$id = $_GET['id'];
-	$sql_id = "SELECT * FROM users WHERE id=" . $id;
-	$detail = $conn->query($sql_id);
-	$detail = $detail->fetch_object();
-	$user = $detail->username;
-	$password = $detail->password;
-	$fullname = $detail->fullname;
-	$email = $detail->email;
-	$phone = $detail->phone;
-	$date_created = $detail->date_created;
-	$avartar = $detail->avartar;
-	$host = "http://localhost/tuan_viet_php";
-	$errors = [];
+    $id = $_GET['id'];
+    include 'layouts/user.php';
+    $edit = new Users();
+    $data = $edit->detail_user($id)->fetch_array();
 	if (isset($_POST['btn_editUser'])) {
-		$user = $_POST['username'];
-		$password = $_POST['password'];
-		$fullname = $_POST['fullname'];
-		$email = $_POST['email'];
-		$phone = $_POST['phone'];
-		$date_created = $_POST['date_created'];
-
-		$target_dir = $_SERVER['DOCUMENT_ROOT'] . "/tuan_viet_php/upload/avatar/";
-		$target_file = $target_dir . basename($_FILES["avatar"]["name"]);
-		$avartar = "/upload/avatar/" . $_FILES["avatar"]["name"];
-		$uploadOk = 1;
-		$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-		// Check if image file is a actual image or fake image
-		$check = getimagesize($_FILES["avatar"]["tmp_name"]);
-		if ($check == false) {
-			echo "File is not an image.";
-			$uploadOk = 0;
-		}
-		if (file_exists($target_file)) {
-			echo "Sorry, file already exists.";
-			$uploadOk = 0;
-		}
-		if ($_FILES["avatar"]["size"] > 500000) {
-			echo "Sorry, your file is too large.";
-			$uploadOk = 0;
-		}
-		if ($uploadOk == 0) {
-			$error['avatar'] = 1;
-			echo "Sorry, your file was not uploaded.";
-			// if everything is ok, try to upload file
-		} else {
-			if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file)) {
-				echo "The file " . htmlspecialchars(basename($_FILES["avatar"]["name"])) . " has been uploaded.";
-			} else {
-				echo "Sorry, there was an error uploading your file.";
-			}
-		}
-
-		if (strlen($user) <= 3 || strlen($user) > 20 || !ctype_alnum($user)) {
-			$errors['username'] = 1;
-		}
-		if (strlen($password) < 6) {
-			$errors['password'] = 1;
-		}
-
-		if (strlen($fullname) <= 10) {
-			$errors['fullname'] = 1;
-		}
-
-		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			$errors['email'] = 1;
-		}
-		if (strlen($phone) < 10) {
-			$errors['phone'] = 1;
-		}
-		if (strlen($date_created) <= 5) {
-			$errors['date_created'] = 1;
-		}
-		if ($errors == []) {
-			$sql_update = "UPDATE users SET username = '" . $user . "', password = '" . $password . "', fullname = '" . $fullname . "', email = '" . $email . "', phone = '" . $phone . "', date_created = '" . $date_created . "', avartar = '" . $avartar . "' where id =" . $id;
-			if ($conn->query($sql_update) === TRUE) {
-				header('Location: http://localhost/tuan_viet_php/shopnew/admin/crud/users/list.php');
-			} else {
-				echo "Error: " . $sql_update . "<br>" . $conn->error;
-			}
-		}
+        $data = $edit->edit_user($id, $_POST, $_FILES);
+        header('Location: http://'.$_SERVER['SERVER_NAME'].'/tuan_viet_php/shopnew/admin/crud/users/list.php');
 	}
 	?>
 
@@ -181,9 +104,9 @@ $host = "http://localhost/tuan_viet_php";
 									<div class="m-portlet__body">
 										<div class="form-group m-form__group">
 											<label>Username</label>
-											<input type="text" name="username" value="<?php echo $user; ?>" class="form-control m-input">
+											<input type="text" name="username" value="<?php echo isset($_POST['btn_editUser']) ? $data['data']['username'] : $data['username']; ?>" class="form-control m-input">
 										</div>
-										<?php if (isset($errors['username'])) : ?>
+										<?php if (isset($data['error']['username'])) : ?>
 											<div class="alert alert-primary" role="alert">
 												Username required!
 											</div>
@@ -192,48 +115,53 @@ $host = "http://localhost/tuan_viet_php";
 											<label>Avartar</label>
 											<input type="file" name="avatar" class="form-control m-input">
 										</div>
-										<div><img src="<?php echo $host . $avartar; ?>"></div>
+                                        <?php if (isset($data['error']['avatar'])) : ?>
+                                            <div class="alert alert-primary" role="alert">
+                                                Avartar required!
+                                            </div>
+                                        <?php endif; ?>
+										<div><img src="<?php echo $host . $data['avartar']; ?>"></div>
 										<div class="form-group m-form__group">
 											<label>Password</label>
-											<input type="password" name="password" value="<?php echo $password; ?>" class="form-control m-input">
+											<input type="password" name="password" value="<?php echo isset($_POST['btn_editUser']) ? $data['data']['password'] : $data['password']; ?>" class="form-control m-input">
 										</div>
-										<?php if (isset($errors['password'])) : ?>
+										<?php if (isset($data['error']['password'])) : ?>
 											<div class="alert alert-primary" role="alert">
 												Password required!
 											</div>
 										<?php endif; ?>
 										<div class="form-group m-form__group">
 											<label>Fullname</label>
-											<input type="text" name="fullname" value="<?php echo $fullname; ?>" class="form-control m-input">
+											<input type="text" name="fullname" value="<?php echo isset($_POST['btn_editUser']) ? $data['data']['fullname'] : $data['fullname']; ?>" class="form-control m-input">
 										</div>
-										<?php if (isset($errors['fullname'])) : ?>
+										<?php if (isset($data['error']['fullname'])) : ?>
 											<div class="alert alert-primary" role="alert">
 												Fullname required!
 											</div>
 										<?php endif; ?>
 										<div class="form-group m-form__group">
 											<label>Email</label>
-											<input type="email" name="email" value="<?php echo $email; ?>" class="form-control m-input">
+											<input type="email" name="email" value="<?php echo isset($_POST['btn_editUser']) ? $data['data']['email'] : $data['email']; ?>" class="form-control m-input">
 										</div>
-										<?php if (isset($errors['email'])) : ?>
+										<?php if (isset($data['error']['email'])) : ?>
 											<div class="alert alert-primary" role="alert">
 												Email required!
 											</div>
 										<?php endif; ?>
 										<div class="form-group m-form__group">
 											<label>Phone</label>
-											<input type="text" name="phone" value="<?php echo $phone; ?>" class="form-control m-input">
+											<input type="text" name="phone" value="<?php echo isset($_POST['btn_editUser']) ? $data['data']['phone'] : $data['phone']; ?>" class="form-control m-input">
 										</div>
-										<?php if (isset($errors['phone'])) : ?>
+										<?php if (isset($data['error']['phone'])) : ?>
 											<div class="alert alert-primary" role="alert">
 												Phone required!
 											</div>
 										<?php endif; ?>
 										<div class="form-group m-form__group">
 											<label>Date Created</label>
-											<input type="text" name="date_created" value="<?php echo $date_created; ?>" class="form-control m-input">
+											<input type="text" name="date_created" value="<?php echo isset($_POST['btn_editUser']) ? $data['data']['date_created'] : $data['date_created']; ?>" class="form-control m-input">
 										</div>
-										<?php if (isset($errors['date_created'])) : ?>
+										<?php if (isset($data['error']['phone'])) : ?>
 											<div class="alert alert-primary" role="alert">
 												Date required!
 											</div>
