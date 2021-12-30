@@ -52,15 +52,9 @@ $path = "http://".$_SERVER['SERVER_NAME']."/tuan_viet_php/shopnew/admin/";
 <?php
 include 'layouts/user.php';
 $add = new Users();
-$user = '';
-$password = '';
-$fullname = '';
-$email = '';
-$phone = '';
-$date_created = '';
 if (isset($_POST['btn_addUser'])) {
     $insert = $add->add_user($_POST, $_FILES);
-}
+    }
 ?>
 
 
@@ -108,7 +102,7 @@ if (isset($_POST['btn_addUser'])) {
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group">
                                         <label>Username</label>
-                                        <input type="text" name="username" value="<?php echo $user; ?>"
+                                        <input type="text" name="username" value="<?php echo isset($insert['data']['username']) ? $insert['data']['username'] : ''; ?>"
                                                class="form-control m-input">
                                     </div>
                                     <?php if (isset($insert['error']['username'])) : ?>
@@ -128,7 +122,7 @@ if (isset($_POST['btn_addUser'])) {
                                     </div>
                                     <div class="form-group m-form__group">
                                         <label>Password</label>
-                                        <input type="password" name="password" value="<?php echo $password; ?>"
+                                        <input type="password" name="password" value="<?php echo isset($insert['data']['password']) ? $insert['data']['password'] : ''; ?>"
                                                class="form-control m-input">
                                     </div>
                                     <?php if (isset($insert['error']['password'])) : ?>
@@ -138,7 +132,7 @@ if (isset($_POST['btn_addUser'])) {
                                     <?php endif; ?>
                                     <div class="form-group m-form__group">
                                         <label>Fullname</label>
-                                        <input type="text" name="fullname" value="<?php echo $fullname; ?>"
+                                        <input type="text" name="fullname" value="<?php echo isset($insert['data']['fullname']) ? $insert['data']['fullname'] :''; ?>"
                                                class="form-control m-input">
                                     </div>
                                     <?php if (isset($insert['error']['fullname'])) : ?>
@@ -148,7 +142,7 @@ if (isset($_POST['btn_addUser'])) {
                                     <?php endif; ?>
                                     <div class="form-group m-form__group">
                                         <label>Email</label>
-                                        <input type="email" name="email" value="<?php echo $email; ?>"
+                                        <input type="email" name="email" value="<?php echo isset($insert['data']['email']) ? $insert['data']['email']:''; ?>"
                                                class="form-control m-input">
                                     </div>
                                     <?php if (isset($insert['error']['email'])) : ?>
@@ -158,7 +152,7 @@ if (isset($_POST['btn_addUser'])) {
                                     <?php endif; ?>
                                     <div class="form-group m-form__group">
                                         <label>Phone</label>
-                                        <input type="text" name="phone" value="<?php echo $phone; ?>"
+                                        <input type="text" name="phone" value="<?php echo isset($insert['data']['phone']) ? $insert['data']['phone'] :''; ?>"
                                                class="form-control m-input">
                                     </div>
                                     <?php if (isset($insert['error']['phone'])) : ?>
@@ -168,7 +162,7 @@ if (isset($_POST['btn_addUser'])) {
                                     <?php endif; ?>
                                     <div class="form-group m-form__group">
                                         <label>Date Created</label>
-                                        <input type="text" name="date_created" value="<?php echo $date_created; ?>"
+                                        <input type="text" name="date_created" value="<?php echo isset($insert['data']['date_created']) ? $insert['data']['date_created'] :''; ?>"
                                                class="form-control m-input">
                                     </div>
                                     <?php if (isset($insert['error']['date_created'])) : ?>
