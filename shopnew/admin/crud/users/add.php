@@ -48,7 +48,6 @@ $path = "http://".$_SERVER['SERVER_NAME']."/tuan_viet_php/shopnew/admin/";
 
 <body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 
-<<<<<<< HEAD
 <!--PHP validate -->
 <?php
 include 'layouts/user.php';
@@ -57,25 +56,6 @@ if (isset($_POST['btn_addUser'])) {
     $insert = $add->add_user($_POST, $_FILES);
     }
 ?>
-=======
-	<!--PHP validate -->
-	<?php
-	include "user.php";
-	$new_user = new User();
-
-	$user = '';
-	$password = '';
-	$fullname = '';
-	$email = '';
-	$phone = '';
-	$date_created = '';
-	if (isset($_POST['btn_addUser'])) {
-		$insert = $new_user->add_user($_POST, $_FILES);
-
-		
-	}
-	?>
->>>>>>> vali_categories_posts
 
 
 <!-- begin:: Page -->
@@ -116,7 +96,6 @@ if (isset($_POST['btn_addUser'])) {
                             </div>
 
 
-<<<<<<< HEAD
                             <!--begin::Form-->
                             <form method="post" enctype="multipart/form-data" action="add.php"
                                   class="m-form m-form--fit m-form--label-align-right">
@@ -131,20 +110,6 @@ if (isset($_POST['btn_addUser'])) {
                                             Username required!
                                         </div>
                                     <?php endif; ?>
-=======
-								<!--begin::Form-->
-								<form method="post" enctype="multipart/form-data" action="add.php" class="m-form m-form--fit m-form--label-align-right">
-									<div class="m-portlet__body">
-										<div class="form-group m-form__group">
-											<label>Username</label>
-											<input type="text" name="username" value="<?php echo $user; ?>" class="form-control m-input">
-										</div>
-										<?php if (isset($insert['error']['username'])) : ?>
-											<div class="alert alert-primary" role="alert">
-												Username required!
-											</div>
-										<?php endif; ?>
->>>>>>> vali_categories_posts
 
                                     <div class="form-group m-form__group">
                                         <label>Avartar</label>
